@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    url: 'jdbc:mysql://localhost:3306/examapplication'
+    username: root
+    password: Chitti@141
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+  output:
+    ansi:
+      enabled: always
+certificate:
+  template:
+    path: certificate-template/My3Tech Certificate Of Completion.pdf
+  output:
+    directory: >-
+      ./certificates
+jwt:
+  access-token:
+    expiration: 5m
+  refresh-token:
+    expiration: 60m
+server:
+  error:
+    whitelabel:
+      enabled: false

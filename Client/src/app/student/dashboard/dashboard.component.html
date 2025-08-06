@@ -1,0 +1,78 @@
+<div *ngIf="loading" class="dashboard-loading">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading Dashboard...</span>
+  </div>
+</div>
+
+<div *ngIf="!loading" class="dashboard-container">
+  <div class="dashboard-card upcoming">
+    <h3>📅 Upcoming Exams</h3>
+    <p>{{ upcomingCount }}</p>
+  </div>
+
+  <div class="dashboard-card ongoing">
+    <h3>⏱ Ongoing Exams</h3>
+    <p>{{ ongoingCount }}</p>
+  </div>
+
+  <div class="dashboard-card completed">
+    <h3>✅ My Exams</h3>
+    <p>{{ myExamCount }}</p>
+  </div>
+
+  <div class="dashboard-card certificate">
+    <h3 class=""><i class="bi bi-award-fill fs-5"></i>My Certificates</h3>
+    <p class="">{{certificationCount}}</p>
+  </div>
+</div>
+<!-- Donut Chart Section -->
+<div class="mt-2 donut-section">
+  <h5 class="gradient-heading mb-4">📊 Ongoing Exam/Attempts Progress</h5>
+  <div class="donutChart">
+    <canvas
+      baseChart
+      [data]="donutChartConfig.data"
+      [type]="donutChartConfig.type"
+      [options]="donutChartConfig.options">
+    </canvas>
+  </div>
+</div>
+<!-- <div class="dropdown-table-section my-4">
+  <label for="examFilter" class="fw-semibold">Select Exam</label>
+  <select id="examFilter"
+          class="form-select w-auto d-inline-block mx-2"
+          [(ngModel)]="dropdownSelectedExamId"
+          (change)="onDropdownChange()">
+    <option *ngFor="let exam of dropdownOptions" [value]="exam.value">
+      {{ exam.label }}
+    </option>
+  </select>
+
+  <table class="table table-bordered mt-3" *ngIf="selectedExamDetails">
+    <thead class="table-light">
+      <tr>
+        <th>Title</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Attempts</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ selectedExamDetails.title }}</td>
+        <td>{{ selectedExamDetails.startTime | date: 'short' }}</td>
+        <td>{{ selectedExamDetails.endTime | date: 'short' }}</td>
+        <td>{{ selectedExamDetails.attempts }}</td>
+        <td>
+          <span *ngIf="selectedExamDetails.passed">✅ Passed</span>
+          <span *ngIf="!selectedExamDetails.passed && selectedExamDetails.attempts >= 3">❌ Failed</span>
+          <span *ngIf="selectedExamDetails.attempts < 3 && !selectedExamDetails.passed">🟡 In Progress</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div> -->
+
+
+

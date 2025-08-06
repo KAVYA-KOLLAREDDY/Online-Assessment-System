@@ -1,0 +1,120 @@
+<div class="container mt-3 mb-4">
+  <h2 class="text-center mb-4 text-primary fw-bold">View Subjects</h2>
+
+  <div class="table-responsive shadow rounded-2 overflow-auto">
+    <table
+      class="table table-hover align-middle text-center mb-0"
+      *ngIf="subjects().length > 0; else noData"
+    >
+      <thead class="text-nowrap">
+        <tr>
+          <th scope="col">S.No</th>
+          <th scope="col">📘 Subject</th>
+          <th scope="col">📝 Description</th>
+          <th scope="col">📅 Created On</th>
+          <th scope="col">✅ Status</th>
+          <th scope="col">⚙️ Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let subject of subjects()">
+          <td>{{ subject.subjectId }}</td>
+          <td class="fw-semibold">{{ subject.subjectName }}</td>
+          <td
+            class="text-wrap text-break"
+            style="min-width: 200px; max-width: 300px;text-align: justify;"
+          >
+            {{ subject.description }}
+          </td>
+          <td>{{ subject.createdDate | date : "yyyy-MM-dd" }}</td>
+          <td>
+            <span
+              class="badge rounded-pill px-2 py-1"
+              [ngClass]="{
+                'bg-success': subject.status === 'ACTIVE',
+                'bg-danger': subject.status === 'INACTIVE'
+              }"
+            >
+              {{ subject.status }}
+            </span>
+          </td>
+            @if (currentPermission() === 'READ') {
+              <td class="">
+                <button
+                  class="btn btn-outline-primary btn-sm "
+                  [disabled]="subject.status === 'INACTIVE'"
+                  (click)="createExam(subject)"
+                >
+                Create Exam
+                </button>
+
+                <button
+                  class="btn btn-outline-secondary btn-sm ms-3"
+                  [disabled]="subject.status === 'INACTIVE'"
+                  (click)="manageSubtopics(subject)"
+                >
+                Manage Subtopics
+                </button>
+              </td>
+          } @else {
+            <td>
+              <button
+                class="btn btn-outline-secondary btn-sm"
+                (click)="openModalWithSubject(subject)"
+              >
+              Modify Status
+              </button>
+            </td>
+          }
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #noData>
+    <p class="text-danger text-center fw-semibold mt-4">
+      ⚠️ No subjects found.
+    </p>
+  </ng-template>
+</div>
+
+<div
+  class="modal fade show d-block"
+  tabindex="-1"
+  role="dialog"
+  *ngIf="showModal"
+  style="background-color: rgba(0, 0, 0, 0.5)"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modify Subject Status</h5>
+        <button type="button" class="btn-close" (click)="closeModal()"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Subject:</strong> {{ selectedSubject?.subjectName }}</p>
+
+        <div class="form-group mt-3">
+          <label for="status"><strong>Status:</strong></label>
+          <select
+            id="status"
+            class="form-control mt-2"
+            [(ngModel)]="selectedStatus"
+          >
+            <option *ngFor="let status of statuses" [value]="status">
+              {{ status }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" (click)="updateSubjectStatus()">
+          Update
+        </button>
+        <button class="btn btn-secondary" (click)="closeModal()">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

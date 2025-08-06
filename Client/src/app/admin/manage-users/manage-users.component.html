@@ -1,0 +1,49 @@
+<div class="main-bg py-4">
+  <div class="container manage-users-card p-4">
+    <h2 class="text-center text-black mb-4">Manage Users</h2>
+
+    <div *ngIf="users().length === 0" class="alert alert-warning text-center">
+      No records found.
+    </div>
+
+    <div *ngIf="users().length > 0" class="table-responsive">
+      <table class="table custom-table table-hover">
+        <thead class="table-dark text-white text-center align-middle">
+          <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Status</th>
+            <!-- <th>Locked</th> -->
+            <th>Created At</th>
+            <th>Options</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users()">
+            <td>{{ user.userId }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.roleName }}</td>
+            <td>
+              <span class="badge bg-success" *ngIf="user.active">Active</span>
+              <span class="badge bg-danger" *ngIf="!user.active">Inactive</span>
+            </td>
+            <!-- <td>
+              <span class="badge bg-primary" *ngIf="!user.locked">Unlocked</span>
+              <span class="badge bg-warning text-dark" *ngIf="user.locked">Locked</span>
+            </td> -->
+            <td>{{ user.createdAt | date: 'short' }}</td>
+            <td>
+              <div class="d-flex justify-content-center gap-2">
+                <button class="btn btn-sm btn-approve" (click)="editUser(user.userId, true)">Approve</button>
+                <button class="btn btn-sm btn-reject" (click)="editUser(user.userId, false)">Reject</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>  
+</div>

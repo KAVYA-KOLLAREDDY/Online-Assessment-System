@@ -1,0 +1,157 @@
+/* ---------- Layout ---------- */
+.exam-management-card {
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+}
+
+/* ---------- Header ---------- */
+.exam-header h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0;
+}
+
+/* ---------- Table Styling ---------- */
+.custom-table {
+  font-family: 'Poppins', sans-serif;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 1rem;
+}
+
+.custom-table thead {
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+}
+
+.custom-table th {
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  padding: 14px;
+}
+
+.custom-table td {
+  font-size: 13px;
+  vertical-align: middle;
+  padding: 12px;
+}
+
+.custom-table tbody tr:hover {
+  background-color: #f0f8ff;
+  transition: 0.3s ease;
+}
+
+/* ---------- Buttons ---------- */
+.btn-view {
+  background-color: #00b894;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+.btn-view:hover {
+  background-color: #019c7a;
+  transform: translateY(-1px);
+}
+
+.btn-delete {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+.btn-delete:hover {
+  background-color: #c0392b;
+  transform: translateY(-1px);
+}
+
+/* ---------- Modal Styling ---------- */
+.custom-modal .modal-content {
+  border-radius: 20px;
+  animation: fadeInUp 0.4s ease;
+  border: 1px solid #dcdcdc;
+}
+
+.modal-header {
+  background: #f5f5ff;
+  border-bottom: 1px solid #eee;
+  padding: 1rem 1.5rem;
+}
+
+.modal-title {
+  font-size: 18px;
+  color: #5038ED;
+}
+
+.modal-body {
+  padding: 1.5rem;
+}
+
+.modal-footer {
+  border-top: 1px solid #eee;
+  background: #f9f9f9;
+  padding: 1rem 1.5rem;
+}
+
+/* ---------- Close Modal Button ---------- */
+.btn-close-modal {
+  background-color: #7f8fa6;
+  color: white;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+.btn-close-modal:hover {
+  background-color: #6c7a92;
+  transform: translateY(-1px);
+}
+
+/* ---------- Fade In Animation ---------- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- Responsive Styling ---------- */
+@media (max-width: 768px) {
+  .exam-header h2 {
+    font-size: 1.4rem;
+  }
+
+  .btn-view, .btn-delete {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .modal-body {
+    font-size: 14px;
+  }
+
+  .custom-table th,
+  .custom-table td {
+    font-size: 12px;
+    padding: 10px;
+  }
+}

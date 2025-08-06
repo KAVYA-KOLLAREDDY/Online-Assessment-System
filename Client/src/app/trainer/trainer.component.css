@@ -1,0 +1,42 @@
+/* examiner-layout.component.css */
+
+.examiner-layout-container {
+  display: flex;
+  min-height: 100vh;
+  background: #f5f6fa;
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
+}
+
+.sidebar-wrapper {
+  width: 250px;
+  background-color: #fff;
+  border-right: 1px solid #e0e0e0;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
+}
+
+.main-content-area {
+  flex-grow: 1;
+  padding: 10px 32px;
+  animation: fadeIn 0.5s ease;
+  overflow-y: auto;
+  min-height: 100vh;
+  background-color: #f9f9fe;
+}
+
+/* Smooth fade-in on page load */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .sidebar-wrapper {
+    display: none; /* You can later replace this with a collapsible mobile sidebar */
+  }
+  .main-content-area {
+    padding: 20px;
+  }
+}

@@ -1,0 +1,114 @@
+/* Gradient, shadowed, sticky navbar */
+.custom-navbar {
+  background: linear-gradient(134deg, #9181F4 0%, #5038ED 100%);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: sticky !important;
+  top: 0;
+  z-index: 1000;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 20px;
+}
+
+/* Navbar Brand Style */
+.navbar-brand {
+  color: white !important;
+  font-weight: 700;
+  font-size: 1.6rem;
+}
+
+/* Nav links with pill style */
+.nav-link {
+  color: white !important;
+  font-weight: 500;
+  transition: all 0.3s ease-in-out;
+  padding: 7px 18px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.nav-link span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+/* Hover effect */
+
+/* Highlight Login/Logout as pill buttons */
+.nav-pill {
+  background-color: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.nav-link span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.nav-link:hover span{
+  padding-right: 25px;
+}
+
+.nav-link:hover span:after{
+  opacity: 1;
+  right: 0;
+}
+/* Welcome text */
+.welcome-text {
+  font-size: 14px;
+  color: #EDE9FE;
+}
+
+/* Logout link hover */
+.logout-link:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: #fff !important;
+  
+}
+
+/* Responsive fix for navbar toggler */
+.navbar-toggler {
+  border: none;
+  outline: none;
+}
+
+.navbar-toggler-icon {
+  filter: brightness(100);
+}
+
+
+/* Responsive media */
+@media screen and (max-width: 768px) {
+  .custom-navbar {
+    border-radius: 0;
+    padding: 0.8rem 1rem;
+  }
+
+  .nav-link {
+    padding: 10px 12px;
+    margin: 5px 0;
+    text-align: center;
+  }
+
+  .navbar-collapse {
+    background-color: rgba(80, 56, 237, 0.95); /* mobile bg */
+    border-radius: 0 0 20px 20px;
+    padding: 10px;
+  }
+}
+.custom-navbar {
+  animation: fadeDown 0.6s ease-in-out;
+}
+
+@keyframes fadeDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

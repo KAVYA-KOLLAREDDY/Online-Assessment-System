@@ -1,0 +1,49 @@
+<div class="container d-flex justify-content-center">
+  <div class="col-md-12">
+    <div class="text-center">
+      <h2 class="text-center fw-bold text-primary mb-4">
+        Create New Exam</h2>
+        <p class="text-dark-emphasis text-center fw-bold  card bg-info-subtle p-3">Subject Name {{ subjectName }}</p>
+    </div>
+    <form [formGroup]="examForm" (ngSubmit)="onSubmit()" class="shadow p-4 bg-white rounded-4">
+      <div class="mb-3">
+        <label for="title" class="form-label fw-semibold text-dark">Exam Title</label>
+        <input
+          type="text"
+          id="title"
+          class="form-control shadow-sm"
+          formControlName="title"
+          required
+          placeholder="Enter exam title"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label fw-semibold text-dark">Description</label>
+        <textarea
+          id="description"
+          class="form-control shadow-sm"
+          formControlName="description"
+          required
+          rows="3"
+          placeholder="Provide a brief description"
+        ></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="date" class="form-label fw-semibold text-dark">Exam Date</label>
+        <input
+          type="date"
+          id="date"
+          class="form-control shadow-sm"
+          formControlName="date"
+          required
+        />
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100 fw-semibold py-2" [disabled]="!examForm.valid">
+        ✅ Create Exam
+      </button>
+    </form>
+  </div>
+</div>

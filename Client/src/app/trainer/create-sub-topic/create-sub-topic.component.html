@@ -1,0 +1,53 @@
+<div class="container create-subtopic-container">
+  <h2>Create a New Subtopic</h2>
+
+  <div class="card shadow p-4 rounded-4 mb-5">
+    <form (ngSubmit)="onSubmit()">
+      <div class="row g-3">
+        <div class="col-md-12">
+          <label for="subject" class="form-label">Select Subject :</label>
+          <select
+            id="subject"
+            class="form-select"
+            [(ngModel)]="selectedSubjectId"
+            name="subject"
+            required
+            (ngModelChange)="onSubjectChange($event)">
+            <option value="" disabled>Select a subject</option>
+            <ng-container *ngFor="let subject of subjects()">
+              <option *ngIf="!subject.alreadyHasSubtopics" [value]="subject.subjectId">
+                {{ subject.subjectName }}
+              </option>
+            </ng-container>
+          </select>
+        </div>
+
+        <div class="col-md-12">
+          <label class="form-label">Subtopic Name(s):</label>
+        
+          <div *ngFor="let name of subtopicNames; let i = index; trackBy: trackByIndex" class="mb-2">
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="subtopicNames[i]"
+              name="subtopicName{{i}}"
+              placeholder="Enter subtopic name"
+              required>
+          </div>
+        
+          <button type="button" class="btn btn-outline-success btn-sm mt-2 add-subtopic-btn" (click)="addSubtopicField()">
+            + Add Subtopic
+          </button>
+        </div>
+      </div>
+
+      <div class="text-center mt-4">
+        <button type="submit" class="btn btn-outline-primary create-subtopic-btn">
+          Create Subtopic
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <p *ngIf="message()" class="alert alert-info text-center">{{ message() }}</p>
+</div>

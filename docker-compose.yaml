@@ -1,0 +1,64 @@
+services:
+  online-assessmentdb:
+    image: mysql
+    container_name: online-assessment-db
+    healthcheck: 
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"] 
+      timeout: 10s
+      retries: 10
+      interval: 10s
+      start_period: 10s
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ExamApplication
+    networks:
+      - my3tech_online-assessment
+    deploy:
+      resources:
+        limits:
+          memory: 700m 
+    volumes:
+      - online-assessment-data:/var/lib/mysql
+      - ./DbInit:/docker-entrypoint-initdb.d
+  server:
+    image: my3tech/online-assessment:v1
+    container_name: online-assessment-server
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8081/api/v1/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    environment:
+      SPRING_APPLICATION_NAME: "server"
+      SPRING_DATASOURCE_URL: "jdbc:mysql://online-assessmentdb:3306/ExamApplication"
+      SPRING_PROFILES_ACTIVE: prod
+      CERTIFICATE_TEMPLATE_PATH: certificate-template/My3Tech Certificate Of Completion.pdf
+      CERTIFICATE_OUTPUT_DIRECTORY: ./certificates
+    depends_on:
+      online-assessmentdb:
+        condition: service_healthy
+    networks:
+      - my3tech_online-assessment
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+  
+  frontend:
+    build: ./client
+    container_name: online-assessment-client
+    ports:
+      - 8085:80
+    depends_on:
+      server:
+        condition: service_healthy
+    networks:
+      - my3tech_online-assessment
+
+networks:
+  my3tech_online-assessment:
+    driver: "bridge"
+
+volumes:
+  online-assessment-data: 
+ 

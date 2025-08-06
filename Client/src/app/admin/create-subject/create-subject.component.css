@@ -1,0 +1,108 @@
+/* Container Card */
+.form-card {
+  max-width: 600px;
+  border-radius: 16px;
+  background-color: #ffffff;
+  box-shadow: 0 12px 25px rgba(80, 56, 237, 0.1);
+}
+
+/* Heading Gradient */
+.gradient-heading {
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/*---------------------------------
+  💡 Input Field Hover Animations
+----------------------------------*/
+.styled-input {
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+  border: 1px solid #ced4da;
+  background-color: #fff;
+}
+
+.styled-input:hover {
+  border-color: #6e3fee;
+  background-color: #f3f0ff;
+  box-shadow: 0 0 0 3px rgba(80, 56, 237, 0.08);
+}
+
+.styled-input:focus {
+  border-color: #5038ed;
+  box-shadow: 0 0 0 4px rgba(80, 56, 237, 0.15);
+  outline: none;
+}
+
+/*---------------------------------
+  💡 Button Hover + Active Effects
+----------------------------------*/
+.submit-btn {
+  background: linear-gradient(134deg, #6e3fee, #5038ed);
+  color: white;
+  font-weight: 600;
+  padding: 12px 20px;
+  border-radius: 12px;
+  transition: all 0.3s ease-in-out;
+  border: none;
+  transform: scale(1);
+}
+
+.submit-btn:hover {
+  background: #3e2fcc;
+  transform: scale(1.03) translateY(-2px);
+  box-shadow: 0 8px 20px rgba(80, 56, 237, 0.2);
+}
+
+.submit-btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 5px 10px rgba(80, 56, 237, 0.15);
+}
+
+
+/* Validation animation */
+.animated-validation {
+  font-size: 0.8rem;
+  color: #e74c3c;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Submit button */
+.submit-btn {
+  background: linear-gradient(134deg, #6e3fee, #5038ed);
+  color: white;
+  font-weight: 600;
+  padding: 12px 20px;
+  border-radius: 12px;
+  transition: all 0.2s ease-in-out;
+  border: none;
+}
+
+
+
+/* Fade in effect for messages */
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .gradient-heading {
+    font-size: 1.5rem;
+  }
+}

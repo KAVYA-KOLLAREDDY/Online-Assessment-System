@@ -1,0 +1,46 @@
+<div class="container mt-2">
+  <h2 class="text-center fw-bold text-primary mb-4">📊 Exam Results</h2>
+
+  @if (examResults().length > 0) {
+    <div class="table-responsive shadow-lg rounded-4 p-4 bg-white">
+      <table class="table table-hover table-bordered align-middle text-center">
+        <thead class="table-dark">
+          <tr>
+            <th>👨‍🎓 Student Name</th>
+            <th>📘 Exam Title</th>
+            <th>🎯 Total Marks</th>
+            <th>📏 Obtained Marks</th>
+            <th>📊 Percentage</th>
+            <th>🎉 Result</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let result of examResults()">
+            <td class="fw-medium text-capitalize">{{ result.studentName || 'N/A' }}</td>
+            <td class="fw-medium text-capitalize">{{ result.examName || 'N/A' }}</td>
+            <td class="fw-bold text-secondary">{{ result.totalMarks ?? '0' }}</td>
+            <td class="fw-bold text-primary">{{ result.obtainedMarks ?? '0' }}</td>
+            <td class="fw-bold" 
+                [ngClass]="{
+                  'text-success': result?.percentage! >= 50,
+                  'text-danger': result?.percentage! < 50
+                }">
+              {{ result?.percentage !== undefined ? result.percentage + '%' : 'N/A' }}
+            </td>
+            <td class="fw-bold"
+                [ngClass]="{
+                  'text-success': result.isQualified === true,
+                  'text-danger': result.isQualified === false
+                }">
+                {{ result.isQualified ? '✅ Passed' : '❌ Failed' }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  } @else {
+    <div class="alert alert-warning text-center mt-4 fs-5 shadow-sm">
+      ⚠️ No Exam Records Found.
+    </div>
+  }
+</div>

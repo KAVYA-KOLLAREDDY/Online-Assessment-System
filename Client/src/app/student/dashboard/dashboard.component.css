@@ -1,0 +1,78 @@
+.dashboard-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  padding: 40px 30px;
+  background-color: #fafbff;
+}
+
+.dashboard-card {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-left: 5px solid #5038ED;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  text-align: center;
+}
+
+.dashboard-card h3 {
+  font-size: 1.1rem;
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 10px;
+  letter-spacing: 0.3px;
+}
+
+.dashboard-card p {
+  font-size: 2.3rem;
+  font-weight: bold;
+  color: #5038ED;
+  margin: 0;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(80, 56, 237, 0.08);
+  border-left-color: #3f2bd9;
+}
+
+/* Loading Spinner */
+.dashboard-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 100px;
+}
+
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+  color: #5038ED;
+}
+
+i{
+  color: gold;
+  padding-right: 2px;
+}
+
+.donut-section {
+  padding: 0 20px !important; /* Same horizontal padding as the dashboard-container */
+  display: flex;
+  flex-direction: column;
+  align-items: center !important;
+}
+
+.donutChart {
+  max-width: 370px;
+  height: 340px;
+  position: relative;
+
+}
+
+@media (max-width: 768px) {
+  .donutChart {
+    margin: 0 auto;  /* Center on mobile */
+  }
+}

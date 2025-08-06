@@ -1,0 +1,90 @@
+/* Gradient Heading */
+*{
+    overflow-y: hidden !important;
+    overflow-x: hidden !important;
+}
+.container-fluid{
+    max-width: 1800px !important;
+    margin: 0 !important;
+    min-height: 600px !important;
+}
+.gradient-heading {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 20px;
+}
+
+/* Guidelines list customization */
+.guideline-list .list-group-item {
+  border: none;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 0.95rem;
+  font-weight: bold;
+  background: transparent;
+  transition: background-color 0.2s ease;
+
+}
+
+.guideline-list .list-group-item:hover {
+  background-color: #f9fbff;
+}
+
+/* Button Style */
+.start-btn {
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.start-btn:hover {
+  background-color: #28a745;
+  transform: scale(1.03);
+}
+.btn-outline-primary.btn-sm {
+  border: 2px solid #6a11cb;
+  color: #6a11cb;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.btn-outline-primary:hover {
+  background: linear-gradient(to right, #6a11cb, #2575fc) !important;
+  color: #fff !important;
+}
+/* Animation */
+@keyframes slideFade {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0 }
+  100% { opacity: 1 }
+}
+
+/* Responsive tweaks */
+@media (max-width: 576px) {
+  .gradient-heading {
+    font-size: 1.6rem;
+  }
+  .start-btn {
+    font-size: 0.9rem;
+    padding: 10px 30px;
+  }
+}

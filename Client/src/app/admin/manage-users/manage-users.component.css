@@ -1,0 +1,169 @@
+/* thead{
+  color: white !important;
+}
+.main-bg {
+    background: white;
+    min-height: 100vh;
+  }
+  
+  .manage-users-card {
+    background:white;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  .custom-table {
+    background: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .table-header {
+    background-color: #0c00b3;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  
+  .custom-table td {
+    text-align: center;
+    vertical-align: middle;
+    color: #333;
+  }
+  
+  .btn-approve {
+    background-color: #28a745;
+    color: white;
+    border: none;
+  }
+  
+  .btn-approve:hover {
+    background-color: #218838;
+  }
+  
+  .btn-reject {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+  }
+  
+  .btn-reject:hover {
+    background-color: #c82333;
+  }
+  
+  @media (max-width: 768px) {
+    .manage-users-card {
+      padding: 20px 15px;
+    }
+  
+    .custom-table th, .custom-table td {
+      font-size: 0.85rem;
+    }
+  }
+   */
+  /* Container Styling */
+.manage-users-card {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.06);
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Heading */
+.manage-users-card h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Table Styling */
+.custom-table {
+  border-radius: 12px;
+  overflow: hidden;
+  font-size: 14px;
+}
+
+.custom-table thead {
+  background: #5038ED;
+  color: #fff;
+}
+
+.custom-table th,
+.custom-table td {
+  text-align: center;
+  vertical-align: middle;
+  padding: 12px 10px;
+}
+
+.custom-table tbody tr:hover {
+  background-color: #f2f8ff;
+  transition: 0.3s ease;
+}
+
+/* Status Badges */
+.badge {
+  font-size: 0.75rem;
+  padding: 6px 10px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+/* Button Styles */
+.btn-approve {
+  background-color: #27ae60;
+  color: #fff;
+  border: none;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+.btn-approve:hover {
+  background-color: #1e8c4e;
+  transform: translateY(-1px);
+}
+
+.btn-reject {
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+.btn-reject:hover {
+  background-color: #c0392b;
+  transform: translateY(-1px);
+}
+
+/* Alert Message */
+.alert-warning {
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: 10px;
+  background-color: #fff8e1;
+  color: #8a6d3b;
+}
+
+/* Responsive Tweaks */
+@media (max-width: 768px) {
+  .custom-table th,
+  .custom-table td {
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  .btn-approve,
+  .btn-reject {
+    padding: 5px 8px;
+    font-size: 12px;
+  }
+
+  .manage-users-card h2 {
+    font-size: 1.5rem;
+  }
+}

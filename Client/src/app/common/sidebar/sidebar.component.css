@@ -1,0 +1,130 @@
+.sidebar {
+  background: linear-gradient(134deg, #9181F4 0%, #5038ED 100%);
+  width: 250px;
+  height: 100vh;
+  position: fixed;
+  top: 75px;
+  left: 0;
+  padding: 30px 20px;
+  color: white;
+  box-shadow: 4px 0 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.4s ease-in-out;
+  font-family: 'Poppins', sans-serif;
+  overflow-y: auto;
+  border-top-right-radius: 0px;
+}
+
+.sidebar h2 {
+  text-align: center;
+  font-size: 1.6rem;
+  margin-bottom: 25px;
+  font-weight: 600;
+  color: white;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  padding: 12px 18px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.sidebar ul li a:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.sidebar ul li a.active {
+  background-color: rgba(255, 255, 255, 0.25);
+  font-weight: 700;
+}
+
+/* Collapsible submenus */
+.sidebar details {
+  margin-bottom: 10px;
+}
+
+.sidebar summary {
+  cursor: pointer;
+  font-weight: 500;
+  padding: 10px 16px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.08);
+  transition: background-color 0.3s ease;
+  color: white;
+}
+
+.sidebar summary:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.sidebar details[open] summary {
+  font-weight: 600;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.sidebar details ul {
+  margin-top: 8px;
+  padding-left: 15px;
+}
+
+/* Collapse for mobile */
+@media (max-width: 991.98px) {
+  .sidebar {
+    position: static;
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+    padding: 20px;
+    background: linear-gradient(134deg, #9181F4 0%, #5038ED 100%);
+  }
+
+  .sidebar ul {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+ button .btn-gradient{
+    left: 1150px !important;
+}
+/* Button Gradient (☰ Menu toggle) */
+.btn-gradient {
+  background: linear-gradient(134deg, #9181F4 0%, #5038ED 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 8px 16px;
+  font-weight: 600;
+  transition: 0.3s ease-in-out;
+}
+
+.btn-gradient:hover {
+  background: linear-gradient(134deg, #7a6ff2 0%, #3c30da 100%);
+}
+.sidebar {
+  animation: slideInSidebar 0.6s ease-in-out;
+}
+
+@keyframes slideInSidebar {
+  from {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

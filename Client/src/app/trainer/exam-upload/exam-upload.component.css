@@ -1,0 +1,214 @@
+  /* .form-row-bordered {
+    margin: 2px;
+    border: 1px solid #dee2e6;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    background-color: #f8f9fa00;
+  } */
+.exam-form-container {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 12px 25px rgba(80, 56, 237, 0.1);
+  max-width: 1000px;
+  margin: 0 auto;
+  font-family: 'Poppins', sans-serif;
+}
+
+.exam-form-container h5 span {
+  color: #5038ED;
+  font-weight: 600;
+}
+
+/* Form Labels */
+.exam-form-container .form-label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+.exam-form-container .form-control {
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.exam-form-container .form-control:focus {
+  border-color: #5038ED;
+  box-shadow: 0 0 0 0.15rem rgba(80, 56, 237, 0.2);
+}
+
+/* Description Field */
+textarea.form-control {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Card Upload Box */
+.exam-upload-card {
+  border: 1px dashed #9181f4;
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  background: #f8f6ff;
+  margin-top: 1rem;
+}
+
+.exam-upload-card h5 {
+  font-size: 1rem;
+  color: #5038ED;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+/* Validation Messages */
+.text-danger {
+  font-size: 0.75rem;
+  margin-top: 4px;
+}
+
+/* Submit Button */
+.exam-form-container button[type='submit'] {
+  margin-top: 1.5rem;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.2s ease-in-out;
+  background: linear-gradient(134deg, #6e3fee, #5038ED);
+  border: none;
+}
+
+.exam-form-container button[type='submit']:hover {
+  background: #3e2fcc;
+  transform: translateY(-1px);
+}
+
+.exam-form-container .spinner-border {
+  margin-right: 6px;
+}
+/* Heading with gradient effect */
+.gradient-heading {
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+}
+
+/* Subheading badge-style text */
+.subject-badge {
+  display: inline-block;
+  padding: 8px 22px;
+  border-radius: 20px;
+  background: #f0efff;
+  color: #5038ED;
+  font-weight: 600;
+  font-size: 15px;
+  border: 1px solid #dcd4fa;
+  margin-top: 0px !important;
+  animation: slideIn 0.4s ease-in-out;
+}
+/* ========= FORM FIELD HOVER & FOCUS ANIMATIONS ========= */
+.exam-form-container .form-control {
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+  background-color: #fdfdff;
+  box-shadow: inset 0 0 0 transparent;
+}
+
+.exam-form-container .form-control:hover {
+  background-color: #f3f0ff;
+  border-color: #c9bdfc;
+  box-shadow: 0 0 0 0.1rem rgba(145, 129, 244, 0.2);
+}
+
+.exam-form-container .form-control:focus {
+  background-color: #fff;
+  transform: scale(1.015);
+  border-color: #5038ED;
+  box-shadow: 0 0 0 0.2rem rgba(80, 56, 237, 0.25);
+}
+
+/* ========= TEXTAREA SPECIAL EFFECT ========= */
+textarea.form-control:hover {
+  background-color: #f2efff;
+}
+
+/* ========= CARD UPLOAD WITH HOVER ========= */
+.exam-upload-card {
+  transition: all 0.3s ease-in-out;
+}
+
+.exam-upload-card:hover {
+  border-color: #6a11cb;
+  background-color: #f0eeff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(107, 78, 255, 0.1);
+}
+
+/* ========= FORM ENTRANCE ANIMATION ========= */
+.exam-form-container {
+  animation: fadeInSlideUp 0.5s ease-in-out;
+}
+/* ========= VALIDATION MESSAGE STYLING ========= */
+.validation-error {
+  font-size: 14px;
+  margin-top: 4px;
+  color: #d22c1a; /* Elegant red */
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  animation: shakeIn 0.3s ease;
+}
+
+/* Optional: Include an error icon (emoji style or font awesome) */
+.validation-error::before {
+  content: "⚠️";
+  font-size: 14px;
+  line-height: 1;
+}
+
+/* ========= SHAKE ANIMATION WHEN ERROR APPEARS ========= */
+@keyframes shakeIn {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-4px); }
+  40% { transform: translateX(4px); }
+  60% { transform: translateX(-3px); }
+  80% { transform: translateX(3px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes fadeInSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade-in animation */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .gradient-heading {
+    font-size: 1.6rem;
+  }
+  .subject-badge {
+    font-size: 14px;
+    padding: 6px 14px;
+  }
+}

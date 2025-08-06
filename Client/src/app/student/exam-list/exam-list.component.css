@@ -1,0 +1,332 @@
+.gradient-heading {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 20px;
+}
+
+.exam-dashboard-box {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 12px 25px rgba(80, 56, 237, 0.1);
+  overflow: hidden;
+  border: 1px solid #e6e6f5;
+}
+
+/* Tabs */
+.custom-tabs {
+  display: flex;
+  border-bottom: 1px solid #e6e6f5;
+  background-color: #f7f7fc;
+  font-family: 'Poppins', sans-serif;
+}
+
+.custom-tabs .nav-item {
+  flex: 1;
+}
+
+.custom-tabs .nav-link {
+  border: none;
+  border-radius: 0;
+  padding: 14px;
+  background: transparent;
+  color: #555;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.custom-tabs .nav-link.active {
+  background: linear-gradient(to right, #6a11cb, #2575fc) !important; 
+  color: white;
+  box-shadow: inset 0 -4px 0 rgba(255, 255, 255, 0.1);
+}
+
+.custom-tabs .nav-link:hover {
+  background-color: rgba(145, 129, 244, 0.1);
+  color: #000000;
+}
+
+/* Tab content */
+.tab-area {
+  padding: 24px;
+  background-color: #fff;
+}
+
+/* Table container */
+.table-wrapper {
+  padding: 0;
+  background: transparent;
+  border-radius: 0 0 16px 16px;
+}
+
+/* Table styles */
+.exam-table {
+  font-family: 'Poppins', sans-serif;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 0 0 16px 16px;
+  overflow: hidden;
+}
+
+.exam-table thead th{
+  background: #2b2f4a;
+  color: #fff;
+}
+
+.exam-table thead th {
+  font-weight: 600;
+  font-size: 14px;
+  padding: 16px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.exam-table thead tr th:first-child {
+  border-top-left-radius: 0;
+}
+.exam-table thead tr th:last-child {
+  border-top-right-radius: 0;
+}
+
+.exam-table tbody tr {
+  background-color: #f4f3ff;
+  transition: background 0.2s ease;
+}
+
+.exam-table tbody tr:hover {
+  background-color: #e1dffd;
+}
+
+.exam-table tbody td {
+  padding: 14px;
+  font-size: 13px;
+  color: #333;
+  text-align: center;
+  border-top: 1px solid #eee;
+}
+
+.exam-table td:first-child {
+  font-weight: 600;
+  color: #5038ED;
+  text-align: left;
+}
+
+.desc {
+  text-align: justify;
+  word-break: break-word;
+  max-width: 250px;
+  font-size: 13px;
+}
+
+/* Empty table message */
+.empty-message {
+  background: #f5f1ff;
+  color: #604AEF;
+  padding: 16px;
+  border-radius: 12px;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 16px;
+}
+
+/* Button styles */
+.btn {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: 12px;
+  transition: all 0.2s ease-in-out;
+  min-width: 200px;
+}
+
+.btn-start {
+  background: linear-gradient(134deg, #6e3fee, #5038ED);
+  color: white;
+  border: none;
+}
+
+.btn-resume {
+  background-color: #ffb700;
+  color: #fff;
+}
+
+.btn-retake {
+  background-color: #f97007f1;
+  color: #fff;
+}
+
+.btn-passed {
+  background-color: #00b894;
+  color: white;
+}
+
+.btn-failed {
+  background-color: #ea1f09;
+  color: white;
+}
+
+.btn-not-started {
+  background-color: #7f8fa6;
+  color: white;
+}
+
+.btn-expired {
+  background-color: #2f3542;
+  color: white;
+}
+
+.btn:disabled {
+  pointer-events: none;
+}
+.exam-dashboard-box {
+  border-radius: 16px;
+  box-shadow: 0 10px 24px rgba(80, 56, 237, 0.1);
+  background: white;
+  overflow: hidden; /* ensures connected look */
+  padding: 0;
+}
+
+/* Remove individual border-radius from .custom-tabs and .table */
+.custom-tabs {
+  border-radius: 0;
+  border-bottom: 1px solid #eee;
+}
+
+.exam-table thead {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.exam-table tbody {
+  background-color: #fdfbff; /* subtle blending */
+}
+
+.exam-table {
+  border-radius: 0;
+  box-shadow: none;
+}
+.custom-tabs .nav-link.active {
+  background: linear-gradient(134deg, #9181F4, #5038ED);
+}
+
+.exam-table thead {
+  background: linear-gradient(134deg, #9181F4, #5038ED);
+}
+.exam-table th {
+  white-space: nowrap; /* 👈 Prevent line break */
+  font-weight: 600;
+  font-size: 14px;
+  padding: 16px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Optional: Set min-widths for certain columns */
+.exam-table th:nth-child(3),
+.exam-table td:nth-child(3),
+.exam-table th:nth-child(4),
+.exam-table td:nth-child(4),
+.exam-table th:nth-child(5),
+.exam-table td:nth-child(5) {
+  min-width: 110px;
+}
+
+/* Also apply nowrap to data cells if needed */
+.exam-table td {
+  white-space: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* RESPONSIVE STYLING */
+@media (max-width: 992px) {
+  .custom-tabs .nav-link {
+    font-size: 13px;
+    padding: 12px;
+  }
+
+  .btn {
+    min-width: 160px;
+    font-size: 12px;
+  }
+
+  .exam-table th,
+  .exam-table td {
+    font-size: 12px;
+    padding: 12px;
+  }
+
+  .desc {
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .exam-dashboard-box {
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(80, 56, 237, 0.08);
+    margin: 0 10px;
+  }
+
+  .custom-tabs {
+    flex-direction: column;
+  }
+
+  .custom-tabs .nav-item {
+    width: 100%;
+  }
+
+  .custom-tabs .nav-link {
+    text-align: center;
+    font-size: 14px;
+    padding: 12px;
+    border-bottom: 1px solid #e6e6f5;
+  }
+
+  .exam-table thead {
+    display: none; /* Hide header on mobile */
+  }
+
+  .exam-table tbody tr {
+    display: block;
+    margin-bottom: 1rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    padding: 10px;
+  }
+
+  .exam-table tbody td {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 14px;
+    border: none;
+    font-size: 13px;
+  }
+
+  .exam-table tbody td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #5038ED;
+    margin-right: 12px;
+  }
+
+  .exam-table td:first-child {
+    color: #5038ED;
+  }
+
+  .desc {
+    max-width: 100%;
+  }
+
+  .btn {
+    font-size: 12px;
+    padding: 8px 12px;
+    width: 100%;
+    margin-top: 6px;
+  }
+}

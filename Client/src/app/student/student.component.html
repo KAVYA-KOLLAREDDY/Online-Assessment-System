@@ -1,0 +1,45 @@
+ <!-- <div class="row">
+  <div class="col-3">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="col me-5 mt-3">
+    <router-outlet></router-outlet>
+  </div>
+</div> -->
+
+  
+<!-- <div class="d-flex flex-column flex-lg-row min-vh-100">
+  <ng-container *ngIf="showSidebar">
+    <div class="sidebar-container">
+      <app-sidebar></app-sidebar>
+    </div>
+  </ng-container>
+
+  <div class="main-content-container flex-grow-1">
+    <div class="main-inner p-4">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div> -->
+<div class="student-layout-container">
+  <ng-container *ngIf="showSidebar">
+     <div class="sidebar-wrapper">
+    <app-sidebar></app-sidebar>
+  </div>
+  </ng-container>
+ 
+  <div class="main-content-area">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+
+
+  <!-- <div class="row ">
+    <div class="col-3">
+      <app-admin-sidebar></app-admin-sidebar>
+    </div>
+    <div class="col me-5">
+      <router-outlet></router-outlet>
+    </div>
+  </div> -->

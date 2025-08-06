@@ -1,0 +1,47 @@
+<div class="container-fluid bg-white border rounded-4 shadow-sm p-5 my-5" style="max-width: 800px;">
+  <div class="mb-4 text-center">
+    <h2 class="fw-bold text-primary gradient-heading">Examination Guidelines</h2>
+    <p class="text-muted fs-5">Please review all instructions before proceeding with your test.</p>
+  </div>
+
+  <ul class="list-group  mb-4">
+    <li class="list-group-item py-4">
+      <i class="bi bi-shield-lock-fill text-dark me-2"></i>
+      The examination will take place in a secure, full-screen mode. Avoid minimizing, switching tabs, or exiting the screen.
+    </li>
+    <li class="list-group-item py-4">
+      <i class="bi bi-browser-chrome text-dark me-2"></i>
+      Refrain from using browser navigation buttons, refreshing the page, or triggering keyboard shortcuts (e.g., F5, Alt+Tab, Ctrl+R).
+    </li>
+    <li class="list-group-item py-4">
+      <i class="bi bi-clipboard-x text-dark me-2"></i>
+      Copying or capturing exam content is strictly prohibited and monitored.
+    </li>
+    <li class="list-group-item py-4">
+      <i class="bi bi-battery-charging text-dark me-2"></i>
+      Ensure your system is fully charged or connected to power throughout the exam.
+    </li>
+    <li class="list-group-item py-4">
+      <i class="bi bi-wifi text-dark me-2"></i>
+      A stable internet connection is required for the exam session. Interruption may result in submission.
+    </li>
+    <li class="list-group-item py-4">
+      <i class="bi bi-clock-history text-dark me-2"></i>
+      The exam will auto-submit once the allotted time expires. Use your time wisely.
+    </li>
+  </ul>
+
+  <div class="alert alert-warning d-flex align-items-start">
+    <i class="bi bi-exclamation-triangle-fill fs-4 me-3 text-warning"></i>
+    <div class="mt-2">
+      <strong>Important:</strong> Any suspicious or unauthorized action will result in immediate termination of your attempt and submission of your exam.
+    </div>
+  </div>
+
+  <div class="text-center mt-4">
+    <button class="btn btn-lg btn-outline-primary px-5 py-2 shadow-sm" (click)="proceedToExam()">
+      <strong>I Understand & Begin</strong>
+    </button>
+  </div>
+</div>
+

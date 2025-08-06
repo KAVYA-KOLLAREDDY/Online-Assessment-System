@@ -1,0 +1,95 @@
+<div *ngIf="result()" class="container mt-4 pe-5">
+  <h2 class="text-center fw-bold gradient-heading">Exam Result</h2>
+
+  <div class="row g-4 justify-content-center">
+
+    <!-- 🟩 Total Performance Card -->
+    <div class="col-lg-4 col-md-6 col-12">
+      <div class="bg-light border border-2 rounded shadow-sm text-center p-4 h-100">
+<p class="fs-5 mb-4 text-white px-3 py-2 rounded" style="background: linear-gradient(to right, #5038ED, #8e66ff);">
+  <strong>Total Performance</strong>
+</p>
+        <p class="fs-5 fw-bold text-dark"><strong>Total Marks:</strong> {{ result()?.totalMarks }}</p>
+        <p class="fs-5 fw-bold text-dark"><strong>Obtained Marks:</strong> {{ result()?.obtainedMarks }}</p>
+        <p class="fs-5 fw-bold text-dark"><strong>Percentage:</strong> {{ result()?.percentage | number:'1.0-0' }}%</p>
+        <p class="fs-5 fw-bold">
+          <strong>Status:</strong>
+          <span [ngClass]="{'text-success': result()?.passed, 'text-danger': !result()?.passed}" class="fw-bold">
+            {{ result()?.passed ? 'Passed 🎉' : 'Failed ❌' }}
+          </span>
+        </p>
+        <p *ngIf="!result()?.passed" class="fs-5 pt-3 text-danger">
+          <strong>No. of Attempts Left:</strong> {{ result()?.remainingAttempts }}
+        </p>
+      </div>
+    </div>
+
+    
+    <!-- 🟦 Pie Chart -->
+    <div class="col-lg-4 col-md-6 col-12 d-flex flex-column align-items-center">
+      <div class="bg-white shadow rounded p-3 w-100 h-100">
+        <h5 class="text-center fw-bold mb-3">🎯 Topic-wise Performance</h5>
+        <canvas baseChart [data]="chartData" [options]="chartOptions" [plugins]="chartPlugins" [type]="'pie'" style="max-height: 320px;"></canvas>
+      </div>
+    </div>
+
+    <!-- 🟥 Bar Chart -->
+    <div class="col-lg-4 col-md-12 col-12">
+      <div class="bg-white shadow rounded p-3 w-100 h-100">
+        <h5 class="text-center fw-bold mb-3">📊 Subtopic Performance Summary</h5>
+        <div style="height: 320px;">
+          <canvas baseChart [data]="horizontalBarChartData" [options]="horizontalBarChartOptions" [plugins]="chartPlugins" [type]="'bar'"> </canvas>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="text-end mt-4">
+      <a routerLink="/student/exams" class="text-primary">HOME  >></a>
+    </div>
+  <!-- 🎉 Certificate Modal -->
+  <div *ngIf="showCelebrationModal()" class="custom-modal-backdrop">
+    <div class="custom-modal-content">
+      <h2 class="text-success">🎉 Yay!</h2>
+      <strong>Congratulations!</strong> You have earned a certificate for completing this exam.
+      <p>📩 It has been <strong>sent</strong> to your registered email.</p>
+      <button class="btn btn-success mt-3" (click)="showCelebrationModal.set(false)">Okay, Got it!</button>
+    </div>
+  </div>
+</div>
+
+  <!-- <div class="row mt-5">
+  <div style="width: 500px; height: 300px;" class="col-6">
+        <h5 class="text-center fw-bold">Subtopic Performance Summary</h5>
+        <canvas
+          baseChart
+          [data]="barChartData"
+          [options]="barChartOptions"
+          [type]="'bar'"
+        ></canvas>
+      </div>
+      
+      <div class="mt-3 ms-5 ps-5 col-4" *ngIf="improvementTopics.length > 0">
+        <h4 class="fw-bold text-danger text-center">📉 Improvement Areas</h4>
+        <div class="mx-auto" style="max-width: 600px;">
+          <div *ngFor="let topic of improvementTopics" class="mb-3">
+            <div class="d-flex justify-content-between fw-semibold">
+              <span>{{ topic.topic }}</span>
+              <span>{{ topic.percentage }}%</span>
+            </div>
+          <div class="progress" style="height: 20px;">
+          <div class="progress-bar bg-warning text-dark fw-bold" 
+               [style.width.%]="topic.percentage" 
+               role="progressbar" 
+               [attr.aria-valuenow]="topic.percentage" 
+               aria-valuemin="0" 
+               aria-valuemax="100">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div> -->
+
+

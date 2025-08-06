@@ -1,0 +1,72 @@
+<div class="main-bg py-3 mt-4">
+  <div class="container exam-management-card p-4">
+    <div class="card shadow">
+      <div class="text-black text-center exam-header">
+        <h2 class="mt-3">Manage Exams</h2>
+      </div>
+
+      <div class="row card-body m-4 mt-0">
+        <table class="col-12 table custom-table table-hover text-center">
+          <thead class="table-dark text-white text-center align-middle">
+            <tr>
+              <th>#</th>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let exam of exams; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ exam.title }}</td>
+              <td>{{ exam.description }}</td>
+              <td>
+                <div class="d-flex gap-2">
+                <button class="btn btn-view" (click)="viewExam(exam)">View</button>
+                <button class="btn btn-delete" (click)="deleteExam(exam.examId)">Delete</button>
+                </div>
+               </td>
+            </tr>
+          </tbody>
+        </table>
+        <div *ngIf="exams.length === 0" class="text-center mt-3">
+          <p class="text-muted">No exams available.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade show d-block custom-modal" tabindex="-1" role="dialog" *ngIf="showModal">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content shadow">
+      <div class="modal-header justify-content-between">
+        <h5 class="modal-title fw-bold">{{ selectedExam?.title }}</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Description:</strong> {{ selectedExam?.description }}</p>
+        <div *ngIf="examQuestions.length > 0; else noQuestions">
+          <div *ngFor="let question of examQuestions" class="mb-4">
+            <h6>{{ question.questionText }}</h6>
+            <ul class="list-group">
+              <li class="list-group-item" *ngFor="let option of question.options">
+                {{ option.optionText }}
+              </li>
+            </ul>
+          </div>
+        </div>
+        <ng-template #noQuestions>
+          <p class="text-muted">No questions available for this exam.</p>
+        </ng-template>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-close-modal" (click)="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Backdrop -->
+<div class="modal-backdrop fade show" *ngIf="showModal"></div>

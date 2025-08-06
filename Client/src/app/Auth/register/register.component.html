@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center align-items-center">
+    <div class="card border-0 rounded-3 p-3 w-100" style="max-width: 600px;">
+      <div class="card-body">
+        <h2 class="text-center fw-bold mb-4">
+          Register!!
+        </h2>
+  
+        <p class="alert alert-info text-center">
+          You are registering as a <strong>{{ role | titlecase }}</strong>. Please ensure this is correct.
+        </p>
+  
+        <form (ngSubmit)="registerUser()" class="row align-items-center">
+          <div class="col-md-4 text-end">
+            <label for="name" class="form-label fw-bold">Name:</label>
+          </div>
+          <div class="col-md-8">
+            <input type="text" id="name" [(ngModel)]="name" name="name" required class="form-control rounded-3 p-2">
+          </div>
+  
+          <div class="col-md-4 text-end">
+            <label for="email" class="form-label fw-bold">Email:</label>
+          </div>
+          <div class="col-md-8">
+            <input type="email" id="email" [(ngModel)]="email" name="email" required class="form-control rounded-3 p-2">
+          </div>
+  
+          <div class="col-md-4 text-end">
+            <label for="password" class="form-label fw-bold">Password:</label>
+          </div>
+          <div class="col-md-8">
+            <input type="password" id="password" [(ngModel)]="password" name="password" required class="form-control rounded-3 p-2">
+          </div>
+  
+          <div class="col-12 text-center mt-3">
+            <button type="submit" class="btn btn-primary fw-bold px-4 py-2">
+              Register
+            </button>
+          </div>
+        </form>
+  
+        <p class="small fw-bold mt-3 text-center">
+          Already have an account?  
+          <a class="text-decoration-none text-primary fw-semibold" routerLink="/login">Login here</a>
+        </p>
+      </div>
+    </div>
+  </div>
+  

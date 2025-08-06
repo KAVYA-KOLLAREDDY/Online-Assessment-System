@@ -1,0 +1,30 @@
+<h2 class="gradient-heading mt-3">My Certificates</h2>
+<div *ngIf="!loading " class="table-responsive">
+  <table class="table table-bordered table-hover align-middle shadow-sm">
+    <thead class="text-center">
+      <tr>
+        <th>Title</th>
+        <th>Issued On</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody class="text-center">
+      <tr *ngFor="let cert of certificates">
+        <td>{{ cert.examTitle }}</td>
+        <td>{{ cert.issuedAt | date: 'dd MMM yyyy' }}</td>
+        <td>
+          <a (click)="viewCertificate(cert.certificateId)" target="_blank" class="btn btn-link text-primary me-2" title="View">
+            <i class="bi bi-eye-fill fs-5"></i>
+          </a>
+          <a (click)="downloadCertificate(cert.certificateId, cert.examTitle)" download class="btn btn-link text-success" title="Download">
+            <i class="bi bi-download fs-5"></i>
+          </a>
+        </td>
+      </tr>
+      
+    </tbody>
+  </table>
+  <p *ngIf="certificates.length === 0" class="empty-message">
+      No certificates earned.
+    </p>
+</div>

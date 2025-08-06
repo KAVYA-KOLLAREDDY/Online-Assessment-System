@@ -1,0 +1,39 @@
+<ng-container *ngIf="showSidebar">
+  <button
+    class="btn btn-outline-dark d-lg-none m-2 btn-gradient"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#sidebarMenu"
+    aria-expanded="false"
+    aria-controls="sidebarMenu"
+  >
+    ☰
+  </button>
+
+  <nav class="sidebar collapse d-lg-block" id="sidebarMenu">
+    <ul>
+      @if (this.menus() !== null) { 
+        @for (menu of menus().menu; track $index) {
+          <li *ngIf="menu.subMenu.length > 1; else singleLink">
+            <details>
+              <summary>{{ menu.name }}</summary>
+              <ul>
+                @for (subMenu of menu.subMenu; track $index) {
+                  <li>
+                    <a [routerLink]="subMenu.url">{{ subMenu.name }}</a>
+                  </li>
+                }
+              </ul>
+            </details>
+          </li>
+
+          <ng-template #singleLink>
+            <li>
+              <a [routerLink]="menu.url">{{ menu.name }}</a>
+            </li>
+          </ng-template>
+        }
+      }
+    </ul>
+  </nav>
+</ng-container>

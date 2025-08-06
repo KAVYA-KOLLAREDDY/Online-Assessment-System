@@ -1,0 +1,247 @@
+/* Container and Heading */
+.exams-container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 2rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.exams-container h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-align: center;
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 2rem;
+}
+
+/* Exam Card */
+.exam-card {
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(80, 56, 237, 0.08);
+  overflow: hidden;
+  border: 1px solid #ececf4;
+  transition: all 0.3s ease-in-out;
+}
+
+.exam-card:hover {
+  transform: scale(1.01);
+  background: white !important;
+}
+
+/* Card Header */
+.exam-card .card-header {
+  background: #f7f6ff;
+  font-weight: 600;
+  font-size: 1rem;
+  border-bottom: 1px solid #ddd;
+  padding: 1rem 1.5rem;
+}
+
+.exam-card .card-header:hover{
+  background-color: white !important;
+}
+
+.exam-card .card-header .btn {
+  font-size: 0.85rem;
+  padding: 8px 20px;
+  border-radius: 8px;
+  transition: all 0.2s ease-in-out;
+}
+
+.exam-card .card-header .btn:hover {
+  background: #5038ED;
+}
+
+/* Accordion Styling */
+.accordion-button {
+  font-weight: 600;
+  background: #f1f0ff;
+  color: #333;
+  transition: background 0.2s ease;
+}
+
+.accordion-button:not(.collapsed) {
+  background: linear-gradient(134deg, #9181F4, #5038ED);
+  color: white;
+}
+
+.accordion-body {
+  background: #fefeff;
+  padding: 1.5rem;
+  border-radius: 0 0 12px 12px;
+}
+
+/* Input Field Inside Accordion */
+.accordion-body input[type="number"] {
+  border-radius: 8px;
+  font-size: 0.9rem;
+  padding: 4px 14px;
+  transition: border-color 0.2s ease;
+}
+
+.accordion-body input:focus {
+  border-color: #5038ED;
+  box-shadow: 0 0 0 0.12rem rgba(80, 56, 237, 0.15);
+}
+
+/* Modern Glassy Table Container */
+.table-container {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(80, 56, 237, 0.1);
+  overflow-x: auto;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+/* Table Base */
+.table {
+  width: 100%;
+  border-spacing: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Header Styling */
+.table thead {
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  color: white;
+}
+
+.table thead th {
+  padding: 14px 18px;
+  font-size: 0.9rem;
+  text-align: center;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Rounded Header Corners */
+/* .table thead th:first-child {
+  border-top-left-radius: 12px ;
+}
+.table thead th:last-child {
+  border-top-right-radius: 12px;
+} */
+
+/* Body Styling */
+.table tbody tr {
+  background-color: #f9f9ff;
+  transition: background 0.3s ease;
+}
+
+.table tbody tr:hover {
+  background-color: #eae6ff;
+}
+
+.table td {
+  padding: 14px;
+  font-size: 0.85rem;
+  color: #333;
+  text-align: center;
+  vertical-align: middle;
+  border-top: 1px solid #e0e0e0;
+}
+
+.table td:first-child {
+  text-align: left;
+  color: #332396;
+  font-weight: 600;
+}
+
+/* Inputs inside table */
+.table input[type="number"],
+.table input[type="text"] {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 0.8rem;
+  width: 100%;
+  transition: all 0.2s ease-in-out;
+}
+
+.table input:focus {
+  outline: none;
+  border-color: #5038ED;
+  box-shadow: 0 0 0 2px rgba(80, 56, 237, 0.2);
+}
+
+/* Button inside table */
+.table button {
+  font-size: 0.8rem;
+  padding: 6px 12px;
+  border-radius: 10px;
+  transition: background 0.2s ease;
+}
+
+.table button{
+  background-color: #5038edb9;
+  color: white;
+}
+
+.table button:focus{
+  background-color: #5038ED;
+  color: white;
+}
+
+/* Difficulty Table */
+.table-sm th,
+.table-sm td {
+  padding: 8px;
+}
+
+/* Last Row Rounded Bottom */
+.table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 12px;
+}
+.table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 12px;
+}
+ 
+.form-control:hover{
+  background-color: #f3f0ff;
+  border-color: #c9bdfc;
+  box-shadow: 0 0 0 0.1rem rgba(145, 129, 244, 0.2);
+
+}
+/* Button inside difficulty toggle */
+.accordion-body .btn-sm {
+  font-weight: 600;
+  border-radius: 8px;
+  font-size: 0.75rem;
+}
+
+.accordion-body .btn-sm:hover {
+  transform: scale(1.02);
+}
+
+/* Save Button */
+.accordion-body .btn-success {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 10px 16px;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .exams-container h2 {
+    font-size: 1.5rem;
+  }
+
+  .accordion-body {
+    padding: 1rem;
+  }
+
+  .accordion-body input[type="number"] {
+    width: 100% !important;
+  }
+
+  .btn-sm {
+    width: 100%;
+    margin-top: 8px;
+  }
+}

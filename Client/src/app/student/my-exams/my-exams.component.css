@@ -1,0 +1,203 @@
+/* 🌈 Gradient Heading */
+.gradient-heading {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 20px;
+}
+
+/* 📋 Main Container */
+.table-responsive {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 35px 35px;
+  box-shadow: 0 20px 50px rgba(106, 17, 203, 0.1);
+}
+
+/* 🧾 Table Styles */
+.table {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.table thead th {
+  background: #2b2f4a;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 0.6px;
+  padding: 15px;
+}
+
+.table td {
+  padding: 15px;
+  font-size: 15px;
+  color: #333;
+  background: #f9f9fc;
+  vertical-align: middle;
+}
+
+
+
+/* 🟣 Tab Navigation */
+.nav-tabs {
+  background: #f4f4fa;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.nav-tabs .nav-link {
+  border: none;
+  border-radius: 10px;
+  color: #6a11cb;
+  background-color: transparent;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.nav-tabs .nav-link.active {
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  color: #fff !important;
+  box-shadow: 0 4px 14px rgba(106, 17, 203, 0.2);
+}
+
+/* 📊 Score Cards */
+.card {
+  border: none;
+  border-radius: 15px;
+  background: #f8f8ff;
+  box-shadow: 5px 18px 24px rgba(0, 0, 0, 0.06);
+}
+
+.card-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #888;
+}
+
+.card .h5 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/* ✅ Result Badges */
+.badge-pass {
+  background: #198754;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-weight: 600;
+}
+
+.badge-fail {
+  background: #dc3545;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-weight: 600;
+}
+
+/* 🟨 Difficulty badges */
+.badge.text-success {
+  background-color: #e1f4e8;
+  color: #146c43;
+}
+
+.badge.text-primary {
+  background-color: #e0ebff;
+  color: #084298;
+}
+
+.badge.text-dark {
+  background-color: #e4e4e4;
+  color: #343a40;
+}
+
+/* 📎 Report Button */
+.btn-outline-primary.btn-sm {
+  border: 2px solid #6a11cb;
+  color: #6a11cb;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.btn-outline-primary.btn-sm:hover {
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  color: #fff;
+}
+.chart-container {
+  width: 800px;
+  max-width: 100%;
+  height: auto;
+}
+
+/* ⏩ Pagination Controls */
+.pagination-arrows button {
+  background-color: #f0f0f8;
+  border: none;
+  font-size: 18px;
+  color: #6a11cb;
+  padding: 6px 12px;
+  border-radius: 10px;
+  transition: 0.2s ease;
+}
+
+.pagination-arrows button:hover:not(:disabled) {
+  background: #6a11cb;
+  color: white;
+}
+
+.pagination-arrows button:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+/* 🔄 Smooth transition for all interactive elements */
+* {
+  transition: all 0.3s ease-in-out;
+}
+
+/* 🟣 Hover Effect on Table Rows */
+.table tbody tr:hover{
+  background-color: #97b3ee !important;
+  transform: translateX(2px);
+}
+
+/* 📄 Hover on Cards */
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(106, 17, 203, 0.2);
+}
+
+/* 🟢 Hover for Report Button */
+.btn-outline-primary.btn-sm:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(106, 17, 203, 0.25);
+}
+
+/* 🟨 Tabs hover */
+.nav-tabs .nav-link:hover:not(.active) {
+  background-color: rgba(106, 17, 203, 0.08);
+  color: #6a11cb;
+  transform: scale(1.03);
+}
+
+/* 🟩 Badge pop */
+.badge {
+  transition: transform 0.2s ease;
+}
+
+.badge:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.06);
+}
+
+/* ⏩ Pagination arrow hover */
+.pagination-arrows button:not(:disabled):hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(106, 17, 203, 0.3);
+}
+  

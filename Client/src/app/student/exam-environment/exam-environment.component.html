@@ -1,0 +1,222 @@
+<div *ngIf="!examStatusLoader" class="container">
+  <div class="row">
+    <div class="d-flex justify-content-end mb-3">
+      <span class="badge bg-danger fs-5 p-2">
+        Time Left :- {{ displayTime }} ⏱
+      </span>
+    </div>
+  </div>
+  <div class="row dashboard mb-3">
+    <div class="col-3">
+      <div class="card text-center">
+        <div class="card-body">
+          <h5>Attempted</h5>
+          <span class="badge bg-success">{{ getStatusCounts().attempted }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="card text-center">
+        <div class="card-body">
+          <h5>Non-Attempted</h5>
+          <span class="badge bg-purple">{{ getStatusCounts().nonAttempted }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="card text-center">
+        <div class="card-body">
+          <h5>Review</h5>
+          <span class="badge bg-warning">{{ getStatusCounts().review }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="card text-center">
+        <div class="card-body">
+          <h5>Skipped</h5>
+          <span class="badge bg-danger">{{ getStatusCounts().skipped }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row environment-body-row">
+    <div class="col-9 environment-body">
+      <div *ngIf="questions.length > 0" class="card question-card mb-5 border-1 p-3 bg-white rounded">
+        <div class="card-body">
+          <!-- Coding Question Layout -->
+<!-- <ng-container *ngIf="currentQuestion.questionType === 'CodingSnippet'; else normalQuestion">
+  <p class="fw-bold fs-4 text-black">{{ codeQuestionText }}</p>
+  <ngx-monaco-editor
+  [options]="editorOptions"
+  [(ngModel)]="codeToShow"
+  style="height: 300px">
+</ngx-monaco-editor>
+
+</ng-container> -->
+          <ng-container *ngIf="currentQuestion.questionType === 'CodingSnippet'; else normalQuestion">
+            <ng-container *ngIf="splitQuestionAndCode(currentQuestion.questionText) as parts">
+              <ng-container *ngIf="parts.code; else normalQuestion">
+                <p class="fw-bold fs-4 text-black">{{ parts.question }}</p>
+                <div class="card bg-light mb-3">
+                  <div class="card-body">
+                    
+                    <pre class="m-0">
+                      <code [innerHTML]="parts.formattedCode" class="hljs"></code>
+                    </pre> 
+
+                  </div>
+                </div>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+          <ng-template #normalQuestion>
+            <p class="fw-bold fs-4 text-black">{{ currentQuestion.questionText }}</p>
+          </ng-template>
+          <div *ngIf="currentQuestion.questionType === 'MSQ'" class="text-bold text-dark-emphasis mb-3">
+            [ Please select exactly {{ requiredMsqCount }} option(s) ]
+          </div>
+          <div class="list-group">
+            <div
+              class="list-group-item border-0 py-2 d-flex align-items-center"
+              *ngFor="let option of currentQuestion.options"
+            >
+              <ng-container *ngIf="currentQuestion.questionType === 'MSQ'; else singleOption">
+                <input
+                  type="checkbox"
+                  class="form-check-input me-3"
+                  [checked]="isOptionSelected(currentQuestion.questionId, option.optionId)"
+                  (change)="selectAnswer(currentQuestion.questionId, option.optionId)"
+                  [disabled]="(currentQuestion.questionType === 'MSQ' &&
+                    !isOptionSelected(currentQuestion.questionId, option.optionId) &&
+                    selectedArray.length >= requiredMsqCount)"
+                />
+              </ng-container>
+              <ng-template #singleOption>
+                <input
+                  type="radio"
+                  class="form-check-input me-3"
+                  [name]="'question_' + currentQuestion.questionId"
+                  [checked]="selectedAnswers[currentQuestion.questionId] === option.optionId"
+                  (change)="selectAnswer(currentQuestion.questionId, option.optionId)"
+                />
+              </ng-template>
+              <label class="form-check-label fs-5">{{ option.optionText }}</label>
+            </div>
+          </div>
+          
+        </div>
+        <div class="mt-4 mx-2 mb-5 d-flex justify-content-between gap-4">
+            <div>
+              <button
+                class="btn btn-warning btn-sm px-3 py-2 fw-bold shadow-sm me-2"
+                (click)="saveForReview()"
+                data-bs-toggle="tooltip"
+                title="Mark for review and go to next question"
+              >
+                Save for Review
+              </button>
+              <button
+                class="btn btn-danger btn-sm px-3 py-2 fw-bold shadow-sm"
+                (click)="skip()"
+                data-bs-toggle="tooltip"
+                title="Skip this question"
+              >
+                Skip
+              </button>
+            </div>
+            <div>
+              <ng-container *ngIf="!showSubmitExamButton">
+                <button
+                  class="btn btn-success btn-sm px-3 py-2 fw-bold shadow-sm me-2"
+                  (click)="saveAndNext()"
+                  [disabled]="selectedAnswers[currentQuestion.questionId] === undefined"
+                  data-bs-toggle="tooltip"
+                  title="Save answer and go to next question"
+                >
+                  Save and Next
+                </button>
+                <!-- <button
+                  class="btn btn-outline-dark btn-sm px-3 py-2 fw-bold shadow-sm me-2"
+                  (click)="clearResponse()"
+                  [disabled]="selectedAnswers[currentQuestion.questionId] === undefined"
+                  data-bs-toggle="tooltip"
+                  title="Clear selected answer"
+                >
+                  Clear Response
+                </button> -->
+              </ng-container>
+              <button
+                *ngIf="showSubmitExamButton"
+                class="btn btn-success btn-sm px-3 py-2 fw-bold shadow-sm"
+                (click)="submitExamWithConfirmation()"
+                data-bs-toggle="tooltip"
+                title="Submit your exam"
+              >
+                Submit Exam
+              </button>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div class="col-3 badges-box environment-body">
+      <div class="row p-2">
+        <div class="col-12 badge-container">
+          <ng-container *ngFor="let question of questions; let i = index; trackBy: trackByQuestion">
+            <span
+              class="badge"
+              [ngClass]="getBadgeClass(question.questionId)"
+              (click)="goToQuestion(i)"
+              style="cursor: pointer;"
+              data-bs-toggle="tooltip"
+              [attr.title]="'Question ' + (i + 1)"
+            >
+              {{ i + 1 }}
+            </span>
+          </ng-container>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="color-explanation text-muted small fst-italic">
+            <strong class="pb-5">Color Legends :-</strong>
+            <ul class="ps-1 mt-2 d-flex gap-2 flex-column">
+              <li><span class="color-bullet bg-success"></span> <b>Answered</b> – Answer saved successfully.</li>
+              <li><span class="color-bullet bg-warning"></span> <b>Marked for Review</b> – Marked for review before final submission.</li>
+              <li><span class="color-bullet bg-danger"></span> <b>Skipped</b> – Skipped without answering.</li>
+              <li><span class="color-bullet bg-purple"></span> <b>Not Viewed</b> – Yet to be viewed or attempted.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="examStatusLoader" class="text-center">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Submitting...</span>
+  </div>
+  <p class="mt-2">Submitting...</p>
+</div>
+<div *ngIf="modalVisible" class="modal-backdrop"></div>
+<div *ngIf="modalVisible" class="modal-wrapper">
+  <div class="modal-content" [ngClass]="modalType">
+    <h4 class="modal-title">{{ modalTitle }}</h4>
+    <p class="modal-message" style="white-space: pre-line">{{ modalMessage }}</p>
+    <div class="mt-3 text-center gap-3 modal-buttons">
+      <button
+        class="btn btn-danger btn-sm px-4 py-2 fw-bold"
+        (click)="closeModalAndSubmit()"
+      >
+        OK
+      </button>
+      <button
+        *ngIf="modalType !== 'violation'"
+        class="btn btn-outline-secondary btn-sm px-3 py-2 fw-bold me-2"
+        (click)="closeModal()"
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>

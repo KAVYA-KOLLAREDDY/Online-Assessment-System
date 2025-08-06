@@ -1,0 +1,57 @@
+#spring.jpa.hibernate.ddl-auto=update
+#spring.jpa.show-sql=true
+#loging.level.root=on
+
+#logging.level.org.hibernate.SQL=DEBUG
+#logging.level.org.hibernate.type.descriptor.sql=TRACE
+
+spring:
+  application:
+    name: examApplication
+  profiles:
+    active: dev
+  mvc:
+    servlet:
+      path: /api/v1
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: kavyakollareddy141@gmail.com
+    password: sour nzui iemr mwex
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  certificate:
+    template:
+      path: certificate-template/My3Tech Certificate Of Completion.pdf
+    output:
+      directory: >-
+        ./certificates
+logging:
+  level:
+    root: INFO
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql: TRACE
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 'health,info'
+  endpoint:
+    health:
+      show-details: always
+server:
+  port: 8081
+  error:
+    whitelabel:
+      enabled: false
+devtools:
+  restart:
+    enabled: false

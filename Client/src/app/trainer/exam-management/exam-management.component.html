@@ -1,0 +1,252 @@
+<div class="container exams-container">
+  <h2>All Exams</h2>
+  <div *ngFor="let exam of exams()" class="card mb-3 exam-card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <span>{{ exam.title }}</span>
+      <button class="btn btn-outline-primary btn-sm px-4" (click)="toggleExam(exam)">
+        {{ exam.isEditing ? 'Edit Exam' : 'Manage Exam' }}
+      </button>
+    </div>
+    <div *ngIf="expandedExam === exam" class="card-body">
+      <div *ngFor="let subject of exam.subjects" class="accordion mb-3" id="accordion{{subject.subjectId}}">
+        <div class="accordion-item">
+          <h3 class="accordion-header" id="heading{{subject.subjectId}}">
+            <button class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    [attr.data-bs-target]="'#collapse' + subject.subjectId"
+                    aria-expanded="false"
+                    [attr.aria-controls]="'collapse' + subject.subjectId">
+              {{ subject.subjectName }}
+            </button>
+          </h3>
+          <div [id]="'collapse' + subject.subjectId" class="accordion-collapse collapse"
+               [attr.aria-labelledby]="'heading' + subject.subjectId"
+               [attr.data-bs-parent]="'#accordion' + subject.subjectId">
+            <div class="accordion-body">
+              <div class="mb-3 d-flex gap-3" *ngIf="!exam.isEditing">
+  <div>
+    <label class="form-label fw-semibold">No.of Questions:</label>
+    <input type="number"
+      class="form-control form-control-sm"
+      [(ngModel)]="exam.totalQuestions"
+      placeholder="Enter total number of questions"
+      style="max-width: 200px;" />
+  </div>
+
+  <!-- 🆕 Exam Type Dropdown -->
+  <div>
+    <label class="form-label fw-semibold">Exam Type:</label>
+    <select class="form-select form-select-sm"
+      [(ngModel)]="exam.examType"
+      style="max-width: 200px;">
+      <option value="Programming">Programming</option>
+      <option value="Quantitative">Quantitative</option>
+    </select>
+  </div>
+</div>
+
+
+              <table class="table table-bordered align-middle">
+                <thead class="table-light">
+                  <tr>
+                    <th>Subtopic</th>
+                    <th>Percentage</th>
+                    <th>Difficulty</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let sub of subject.subTopics">
+                    <td>{{ sub.name }}</td>
+                    <td>
+                      <input type="number" class="form-control form-control-sm" [(ngModel)]="sub.percentage" placeholder="Enter Percentage%">
+                    </td>
+                    <td>
+                      <button class="btn btn-sm btn-outline-secondary" (click)="toggleDifficulty(sub)">
+                        Manage Difficulty Level
+                      </button>
+                      <div *ngIf="sub.showDifficulty" class="mt-2">
+                        <table class="table table-bordered table-sm">
+                          <thead class="table-light">
+                            <tr>
+                              <th>Level</th>
+                              <th>Percentage</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let level of ['Basic','Intermediate','Advance']">
+                              <td>{{ level }}</td>
+                              <td>
+                                <input type="number" class="form-control form-control-sm" [(ngModel)]="sub[level.toLowerCase()]" placeholder="% for {{ level }}">
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <button class="btn btn-success btn-sm text-end p-2" (click)="saveExam(exam, subject)">
+                {{ exam.isEditing ? 'Update' : 'Save' }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="container mt-4">
+  <h2 class="mb-4">All Exams</h2>
+  <div *ngFor="let exam of exams()" class="card mb-3 shadow-sm">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <span class="fw-bold">{{ exam.title }}</span>
+      <button class="btn btn-outline-primary btn-sm px-4" (click)="toggleExam(exam)">
+        {{ exam.isEditing ? 'Edit Exam' : 'Manage Exam' }}
+      </button>
+    </div>
+    <div *ngIf="expandedExam === exam" class="card-body">
+      <div *ngFor="let subject of exam.subjects" class="accordion mb-3" id="accordion{{subject.subjectId}}">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="heading{{subject.subjectId}}">
+            <button class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    [attr.data-bs-target]="'#collapse' + subject.subjectId"
+                    aria-expanded="false"
+                    [attr.aria-controls]="'collapse' + subject.subjectId">
+              {{ subject.subjectName }}
+            </button>
+          </h2>
+          <div [id]="'collapse' + subject.subjectId" class="accordion-collapse collapse"
+               [attr.aria-labelledby]="'heading' + subject.subjectId"
+               [attr.data-bs-parent]="'#accordion' + subject.subjectId">
+            <div class="accordion-body">
+              <table class="table table-bordered align-middle">
+                <thead class="table-light">
+                  <tr>
+                    <th>Subtopic</th>
+                    <th>Percentage</th>
+                    <th>Difficulty</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let sub of subject.subTopics">
+                    <td>{{ sub.name }}</td>
+                    <td>
+                      <input type="number" class="form-control form-control-sm" [(ngModel)]="sub.percentage" placeholder="Enter %">
+                    </td>
+                    <td>
+                      <button class="btn btn-sm btn-outline-secondary" (click)="toggleDifficulty(sub)">
+                        Manage Difficulty Level
+                      </button>
+                      <div *ngIf="sub.showDifficulty" class="mt-2">
+                        <table class="table table-bordered table-sm">
+                          <thead class="table-light">
+                            <tr>
+                              <th>Level</th>
+                              <th>Percentage</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let level of ['Basic','Intermediate','Advance']">
+                              <td>{{ level }}</td>
+                              <td>
+                                <input type="number" class="form-control form-control-sm" [(ngModel)]="sub[level.toLowerCase()]" placeholder="% for {{ level }}">
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <button class="btn btn-success btn-sm text-end p-2" (click)="saveExam(exam, subject)">
+                {{ exam.isEditing ? 'Update' : 'Save' }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- <div class="container mt-4">
+  <h2 class="mb-4">All Exams</h2>
+  <div *ngFor="let exam of exams()" class="card mb-3 shadow-sm">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <span class="fw-bold">{{ exam.title }}</span>
+      <button class="btn btn-outline-primary btn-sm px-4" (click)="toggleExam(exam)">
+        Manage Exam
+      </button>
+    </div>
+    <div *ngIf="expandedExam === exam" class="card-body">
+      
+      <div *ngFor="let subject of exam.subjects" class="accordion mb-3" id="accordion{{subject.subjectId}}">
+        <div class="accordion-item">
+        <h2 class="accordion-header" id="heading{{subject.subjectId}}">
+            <button class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                [attr.data-bs-target]="'#collapse' + subject.subjectId"
+                aria-expanded="false"
+                [attr.aria-controls]="'collapse' + subject.subjectId">
+              {{ subject.subjectName }}
+          </button>
+        </h2>
+<div [id]="'collapse' + subject.subjectId" class="accordion-collapse collapse"
+     [attr.aria-labelledby]="'heading' + subject.subjectId"
+     [attr.data-bs-parent]="'#accordion' + subject.subjectId">
+            <div class="accordion-body">
+              <table class="table table-bordered align-middle">
+                <thead class="table-light">
+                  <tr>
+                    <th>Subtopic</th>
+                    <th>Percentage</th>
+                    <th>Difficulty</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let sub of subject.subTopics">
+                    <td>{{ sub.name }}</td>
+                    <td>
+                      <input type="number" class="form-control form-control-sm" [(ngModel)]="sub.percentage" placeholder="Enter %">
+                    </td>
+                    <td>
+                      <button class="btn btn-sm btn-outline-secondary" (click)="toggleDifficulty(sub)">
+                        Manage Difficulty Level
+                      </button>
+                      <div *ngIf="sub.showDifficulty" class="mt-2">
+                        <table class="table table-bordered table-sm">
+                          <thead class="table-light">
+                            <tr>
+                              <th>Level</th>
+                              <th>Percentage</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let level of ['Basic','Intermediate','Advance']">
+                              <td>{{ level }}</td>
+                              <td>
+                                <input type="number" class="form-control form-control-sm" [(ngModel)]="sub[level.toLowerCase()]" placeholder="% for {{ level }}">
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            <button class="btn btn-success btn-sm text-end p-2" (click)="saveExam(exam, subject)">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->

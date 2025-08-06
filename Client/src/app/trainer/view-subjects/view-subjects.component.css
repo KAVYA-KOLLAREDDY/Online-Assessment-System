@@ -1,0 +1,202 @@
+/* 🎨 Heading */
+h2.text-primary {
+  font-size: 1.9rem;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.3s ease-in-out;
+}
+
+/* 📦 Table Card */
+.table-responsive {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 10px 24px rgba(80, 56, 237, 0.08);
+  border: 1px solid #eee;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.table-responsive:hover {
+  box-shadow: 0 14px 28px rgba(80, 56, 237, 0.12);
+  transform: scale(1.01);
+}
+
+/* 🧾 Table Head */
+table thead tr th{
+  background: #2b2f4a;
+  color: white;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+table th, table td {
+  padding: 14px 12px;
+  vertical-align: middle;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+/* ✨ Rows */
+table tbody tr {
+  background: #f9f9fe;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+
+/* ✅ Status Badge */
+.badge {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  transition: transform 0.2s ease;
+}
+.badge:hover {
+  transform: scale(1.05);
+}
+
+/* 🧾 Description column */
+td.text-wrap.text-break {
+  text-align: justify;
+  font-size: 13px;
+}
+
+/* 🎛️ Buttons */
+.btn {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 10px;
+  transition: all 0.2s ease-in-out;
+}
+.btn-outline-primary {
+  border: 1px solid #6a11cb;
+  color: #6a11cb;
+}
+.btn-outline-primary:hover {
+  background: #6a11cb;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(106, 17, 203, 0.3);
+  transform: translateY(-2px);
+}
+.btn-outline-secondary {
+  background: #5038ED;
+  color: #fff;
+}
+
+.btn-outline-secondary:hover{
+  color: black;
+  box-shadow: 0 4px 12px rgba(106, 17, 203, 0.3);
+  transform: translateY(-2px);
+
+}
+
+/* 🧱 Modal Cleanup */
+.modal-content {
+  border-radius: 12px;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease-in-out;
+}
+.modal-title {
+  font-weight: 600;
+}
+.form-control {
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border 0.3s ease;
+}
+.form-control:focus {
+  border: 2px solid #5038ED;
+  box-shadow: 0 0 0 4px rgba(80, 56, 237, 0.15);
+}
+/* 🔮 Modal Backdrop Animation */
+.modal.show.d-block {
+  animation: fadeInBackdrop 0.3s ease forwards;
+}
+
+@keyframes fadeInBackdrop {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  to {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* 🎬 Modal Content Animation */
+.modal-content {
+  animation: slideFadeUp 0.35s ease forwards;
+  transform-origin: center center;
+  border-radius: 12px;
+  box-shadow: 0 12px 28px rgba(80, 56, 237, 0.15);
+  border: 1px solid #e4e4f0;
+}
+
+/* 💫 Animation Keyframes */
+@keyframes slideFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px) scale(1);
+  }
+}
+
+/* 🧼 Optional: Button Hover Effects */
+.modal-footer .btn-primary:hover {
+  background-color: #5038ED;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(80, 56, 237, 0.2);
+  transition: all 0.2s ease-in-out;
+}
+
+.modal-footer .btn-secondary:hover {
+  background-color: #6c757d;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  table thead {
+    display: none;
+  }
+
+  table tbody tr {
+    display: block;
+    background: #fff;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+    padding: 12px;
+    transition: transform 0.2s ease;
+  }
+
+  table tbody tr:hover {
+    transform: scale(1.01);
+  }
+
+  table tbody td {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 14px;
+    border: none;
+    font-size: 13px;
+  }
+
+  td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #5038ED;
+    margin-right: 10px;
+  }
+
+  .btn {
+    width: 100%;
+    margin-top: 6px;
+  }
+}

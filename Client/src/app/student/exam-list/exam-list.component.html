@@ -1,0 +1,136 @@
+<div class="container mt-3 mb-5">
+  <h2 class="text-center fw-bold mb-4 gradient-heading">Exam Dashboard</h2>
+
+  <div class="exam-dashboard-box">
+    <!-- Tabs -->
+    <ul class="nav custom-tabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#upcoming" role="tab">
+          <i class="bi bi-calendar-event me-2"></i> Upcoming
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#ongoing" role="tab">
+          <i class="bi bi-clock-history me-2"></i> Ongoing
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#missed" role="tab">
+          <i class="bi bi-exclamation-circle me-2"></i> Missed
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#passed" role="tab">
+          <i class="bi bi-check-circle me-2"></i> Passed
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#failed" role="tab">
+          <i class="bi bi-x-circle me-2"></i> Failed
+        </button>
+      </li>
+    </ul>
+
+    <!-- Tab Content -->
+    <div class="tab-content tab-area" id="examTabsContent">
+      <div class="tab-pane fade show active" id="ongoing" role="tabpanel">
+        <ng-container *ngTemplateOutlet="examTable; context: { exams: ongoingExams }"></ng-container>
+      </div>
+      <div class="tab-pane fade" id="upcoming" role="tabpanel">
+        <ng-container *ngTemplateOutlet="examTable; context: { exams: upcomingExams }"></ng-container>
+      </div>
+      <div class="tab-pane fade" id="missed" role="tabpanel">
+        <ng-container *ngTemplateOutlet="examTable; context: { exams: missedExams }"></ng-container>
+      </div>
+      <div class="tab-pane fade" id="passed" role="tabpanel">
+        <ng-container *ngTemplateOutlet="examTable; context: { exams: completedPassedExams }"></ng-container>
+      </div>
+      <div class="tab-pane fade" id="failed" role="tabpanel">
+        <ng-container *ngTemplateOutlet="examTable; context: { exams: completedFailedExams }"></ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Table Template -->
+<ng-template #examTable let-exams="exams">
+  <div class="table-wrapper">
+    <table class="exam-table">
+      <thead>
+        <tr>
+          <th>Exam Title</th>
+          <th style="width: 400px;">Description</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>No. of Attempts</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let exam of exams">
+          <td data-label="Exam Title" class="fw-semibold">{{ exam.title }}</td>
+          <td data-label="Description" class="desc">{{ exam.description }}</td>
+          <td data-label="Start Date">{{ exam.startTime | date: 'dd-MM-yyyy' }}</td>
+          <td data-label="End Date">{{ exam.endTime | date: 'dd-MM-yyyy' }}</td>
+          <td data-label="Attempt Count">{{ exam.attempts }}</td>
+          <td data-label="Action">
+            <button
+              [disabled]="isButtonDisabled(exam)"
+              (click)="startExam(exam)"
+              class="btn btn-clicked"
+              [ngClass]="getButtonClass(exam)"
+            >
+              {{ getButtonLabel(exam) }}
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p *ngIf="exams.length === 0" class="empty-message">
+      No exams available in this section.
+    </p>
+  </div>
+</ng-template>
+
+<!-- <div class="container mt-4 mb-5">
+  <h2 class="text-center fw-bold text-dark">Available Exams</h2>
+
+  <div class="table-responsive mt-4 shadow-lg p-4 bg-light rounded">
+    <table class="table table-striped table-hover border table-bordered align-content-center">
+      <thead class="table-dark text-white text-center align-middle">
+        <tr class="">
+          <th scope="col">Exam Title</th>
+          <th scope="col" style="width: 400px;">Description</th>
+          <th scope="col">Start Date</th>
+          <th scope="col">End Date</th>
+          <th scope="col">No.of Attempts</th>
+          <th scope="col">Action</th>
+          
+        </tr>
+      </thead>
+      <tbody class="align-middle">
+        <tr *ngFor="let exam of exams">
+          <td class="fw-semibold">{{ exam.title }}</td>
+          <td class="desc">{{ exam.description }}</td>
+          <td>{{exam.startTime | date: 'dd-MM-yyyy'}}</td>
+          <td>{{exam.endTime | date: 'dd-MM-yyyy'}}</td>
+          <td class="text-center">{{exam.attempts}}</td>
+          <td class="text-center">
+           <button (click)="startExam(exam)" class="btn btn-outline-dark btn-clicked btn-sm px-4">
+              <i class="bi bi-play-circle"></i> Start Exam
+            </button>
+            <button
+            [disabled]="isButtonDisabled(exam)"
+            (click)="startExam(exam)"
+            class="btn btn-outline-dark btn-clicked btn-sm px-4"
+            [ngClass]="getButtonClass(exam)"
+          >
+            {{ getButtonLabel(exam) }}
+          </button>
+          </td>
+          
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div> -->

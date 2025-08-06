@@ -1,0 +1,26 @@
+<button
+  class="btn btn-outline-dark d-lg-none m-2"
+  type="button"
+  data-bs-toggle="collapse"
+  data-bs-target="#sidebarMenu"
+  aria-expanded="false"
+  aria-controls="sidebarMenu"
+>
+  ☰ Menu
+</button>
+
+<nav class="sidebar collapse d-lg-block" id="sidebarMenu">
+  <h2>Examiner Panel</h2>
+  <ul>
+    @if (this.menus() !== null) { @for (menu of menus().menu; track $index) {
+    @if (menu.subMenu.length === 1 && menu.subMenu.url.trim().length === 0) {
+    <li>
+      <a [routerLink]="menu.url">📜 {{ menu.name }}</a>
+    </li>
+    } @else { @for (subMenu of menu.subMenu; track $index) {
+    <li class="">
+      <a [routerLink]="subMenu.url">📜 {{ subMenu.name }}</a>
+    </li>
+    } } } }
+  </ul>
+</nav>

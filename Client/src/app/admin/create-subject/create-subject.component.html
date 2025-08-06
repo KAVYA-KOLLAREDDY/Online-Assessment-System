@@ -1,0 +1,62 @@
+<div class="main-bg py-5 mt-2">
+  <div class="container">
+    <div class="card shadow form-card mx-auto p-4">
+      <h3 class="gradient-heading text-center mb-3">Create Subject</h3>
+
+      <form [formGroup]="subjectForm" (ngSubmit)="onSubmit()">
+        <!-- Subject Name -->
+        <div class="mb-3">
+          <label for="subjectName" class="form-label fw-bold">Subject Name :</label>
+          <input
+            type="text"
+            id="subjectName"
+            class="form-control styled-input"
+            formControlName="subjectName"
+            required
+          />
+          <small
+            *ngIf="subjectForm.get('subjectName')?.invalid && subjectForm.get('subjectName')?.touched"
+            class="text-danger animated-validation"
+          >
+            Subject Name is required.
+          </small>
+        </div>
+
+        <!-- Description -->
+        <div class="mb-3">
+          <label for="description" class="form-label fw-bold">Description :</label>
+          <textarea
+            id="description"
+            class="form-control styled-input"
+            formControlName="description"
+            rows="3"
+            required
+          ></textarea>
+          <small
+            *ngIf="subjectForm.get('description')?.invalid && subjectForm.get('description')?.touched"
+            class="text-danger animated-validation"
+          >
+            Description is required.
+          </small>
+        </div>
+
+        <!-- Submit -->
+        <button
+          type="submit"
+          class="btn w-100 submit-btn"
+          [disabled]="!subjectForm.valid"
+        >
+          Create Subject
+        </button>
+
+        <!-- Success -->
+        <div
+          *ngIf="successMessage"
+          class="alert alert-success text-center mt-3 fade-in"
+        >
+          {{ successMessage }}
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

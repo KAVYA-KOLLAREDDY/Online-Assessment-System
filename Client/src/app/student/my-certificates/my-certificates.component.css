@@ -1,0 +1,105 @@
+/* Heading */
+.gradient-heading {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 20px;
+}
+
+/* Table Container */
+.table-responsive {
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 6px 20px rgba(80, 56, 237, 0.08);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+/* Table Base */
+.table {
+  font-family: 'Poppins', sans-serif;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  margin: 0;
+  border-radius: 12px;
+}
+
+/* Table Header */
+.table thead th{
+  background: #2b2f4a;
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.table thead th {
+  padding: 14px;
+  border: none;
+}
+
+/* Table Body */
+.table tbody td {
+  font-size: 14px;
+  padding: 12px;
+  vertical-align: middle;
+  color: #444;
+  background-color: #f4f3ff;
+  border-top: 1px solid #eee;
+}
+
+.table tbody tr{
+  background-color: #f4f3ff;
+  transition: background 0.2s ease;
+}
+
+/* Hover Effect on Rows */
+.table-hover tbody tr:hover {
+  background-color: #f4f3ff;
+  transition: background 0.3s ease;
+  box-shadow: 0 4px 10px rgba(145, 129, 244, 0.08);
+}
+
+/* Action Buttons */
+.table .btn-link {
+  font-size: 16px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-link:hover {
+  background-color: #efedff;
+  transform: scale(1.08);
+  box-shadow: 0 4px 12px rgba(145, 129, 244, 0.15);
+}
+
+.btn-link.text-primary:hover {
+  color: #5038ED;
+}
+
+.btn-link.text-success:hover {
+  color: #00b894;
+}
+
+/* Icons */
+.table i {
+  transition: transform 0.2s ease;
+}
+.table i:hover {
+  transform: scale(1.2);
+}
+.empty-message {
+  background: #f5f1ff;
+  color: #604AEF;
+  padding: 16px;
+  border-radius: 12px;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 16px;
+}

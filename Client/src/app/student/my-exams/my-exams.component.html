@@ -1,0 +1,223 @@
+<div class="container mt-3 mb-5">
+<h2 class="text-center fw-bold gradient-heading">My Completed Exams</h2>
+
+  <div class="table-responsive mt-4 shadow-lg p-4 bg-light rounded">
+    <table class="table table-bordered text-center align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>Exam Name</th>
+          <th>Total Marks</th>
+          <th>Marks Obtained</th>
+          <th>Result</th>
+          <th>Report</th>
+        </tr>
+      </thead>
+     <tbody>
+  <ng-container *ngFor="let exam of passedOrFailedExams; let i = index">
+    <ng-container *ngIf="!activeResultId || activeResultId === exam.resultId">
+      <tr>
+        <td>{{ exam.title }}</td>
+        <td>{{ exam.totalMarks }}</td>
+        <td>{{ exam.obtainedMarks }}</td>
+        <td>
+          <span class="badge" [ngClass]="getResultBadge(exam)">
+            {{ getResultText(exam) }}
+          </span>
+        </td>
+        <td>
+          <button class="btn btn-outline-primary btn-sm" (click)="toggleReport(exam)">
+            {{ activeResultId === exam.resultId ? 'Hide Report' : 'View Detailed Report' }}
+          </button>
+        </td>
+      </tr>
+
+      <!-- Show detailed report row only for the active one -->
+      <tr *ngIf="activeResultId === exam.resultId">
+        <td colspan="5">
+          <ul class="nav nav-tabs justify-content-between mb-3 mt-3">
+  <li class="nav-item flex-fill text-center" *ngFor="let tab of reportTabs">
+    <a
+      class="nav-link w-100 fw-bold"
+      [class.active]="activeTab === tab"
+      (click)="activeTab = tab"
+      >
+      {{ tab }}
+    </a>
+  </li>
+</ul>
+          <div [ngSwitch]="activeTab">
+            <div *ngSwitchCase="'Score'" class="p-4 rounded shadow-sm bg-white border border-secondary-subtle">
+  <h4 class="text-primary fw-bold mb-4">📊 Exam Score Summary</h4>
+
+  <div class="row text-center">
+    <div class="col-md-3 col-sm-6 mb-3">
+      <div class="card bg-light h-100">
+        <div class="card-body">
+          <h6 class="card-title text-muted">Total Marks</h6>
+          <p class="h5 fw-bold text-dark">{{ selectedExamReport?.totalMarks }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6 mb-3">
+      <div class="card bg-light h-100">
+        <div class="card-body">
+          <h6 class="card-title text-muted">Obtained Marks</h6>
+          <p class="h5 fw-bold text-success">{{ selectedExamReport?.obtainedMarks }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6 mb-3">
+      <div class="card bg-light h-100">
+        <div class="card-body">
+          <h6 class="card-title text-muted">Percentage</h6>
+          <p class="h5 fw-bold text-primary">{{ selectedExamReport?.percentage }}%</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6 mb-3">
+      <div class="card h-100"
+           [ngClass]="{
+             'bg-success text-white': selectedExamReport?.passed,
+             'bg-danger text-white': !selectedExamReport?.passed
+           }">
+        <div class="card-body">
+          <h6 class="card-title text-white">Status</h6>
+          <p class="h5 fw-bold">{{ selectedExamReport?.passed ? 'Passed' : 'Failed' }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+            <div *ngSwitchCase="'Topic Analysis'">
+              <table class="table table-bordered">
+                <thead class="table-light">
+                  <tr>
+                    <th>Topic</th>
+                    <th>Total Questions</th>
+                    <th>Correct</th>
+                    <th>Score %</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let topic of selectedExamReport?.topics">
+                    <td>{{ topic.topic }}</td>
+                    <td>{{ topic.totalQuestions }}</td>
+                    <td>{{ topic.correctQuestions }}</td>
+                    <td>{{ topic.percentage }}%</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="d-flex justify-content-center mt-4">
+    <div class="chart-container bg-white p-4 rounded shadow-sm text-center">
+      <h5 class=" mb-3 fs-5 gradient-heading">Subtopic Performance Summary</h5>
+      <canvas
+        baseChart
+        [data]="barChartData"
+        [options]="barChartOptions"
+        [type]="'bar'">
+      </canvas>
+    </div>
+  </div>
+            </div>
+<div *ngSwitchCase="'Difficulty Level'">
+<div *ngFor="let topic of difficultyData" class="mb-4">
+  <h5 class="fw-bold text-primary mt-3">{{ topic.subtopic }}</h5>
+  <table class="table table-sm table-bordered text-center">
+    <thead class="table-light">
+      <tr>
+        <th>Difficulty</th>
+        <th>Total Questions</th>
+        <th>Total Marks</th>
+        <th>Correct / Incorrect</th>
+        <th>Marks Obtained</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let stat of topic.difficultyStats">
+        <td>{{ stat.level }}</td>
+        <td>{{ stat.totalQuestions }}</td>
+        <td>{{ stat.totalMarks }}</td>
+        <td>{{ stat.correct }} / {{ stat.incorrect }}</td>
+        <td>{{ stat.marksObtained }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+            </div>
+            <div *ngSwitchCase="'Question Analysis'">
+  <table class="table table-bordered">
+    <thead class="table-light">
+      <tr>
+        <th>#</th>
+        <th>Question</th>
+        <th>Difficulty</th>
+        <th>Your Response(s)</th>
+        <th>Correct Answer(s)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let q of paginatedQuestions; let i = index">
+        <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+        <td>{{ q.questionText }}</td>
+        <td>
+          <span class="badge" [ngClass]="{
+            'text-success': q.difficultyLevel === 'Basic',
+            'text-primary': q.difficultyLevel === 'Intermediate',
+            'text-dark': q.difficultyLevel === 'Advance'
+          }">
+            {{ q.difficultyLevel }}
+          </span>
+        </td>
+        <td>
+          <ul class="list-unstyled mb-0">
+            <li *ngFor="let ans of q.selectedAnswers"><span class="fs-5 text-warning">★  </span>{{  ans }}</li>
+          </ul>
+        </td>
+        <td> 
+          <ul class="list-unstyled mb-0">
+            <li *ngFor="let ans of q.correctAnswers">✔️ {{ ans }}</li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- Pagination Display like "1–5 of 17" -->
+  <!-- Pagination Summary and Controls -->
+<div class="d-flex justify-content-end align-items-center gap-4 text-muted" *ngIf="questionAnalysisData.length">
+  <!-- 🧮 Pagination summary: 1–5 of 23 -->
+  <div class="fw-bolder pt-2">
+        {{ currentPage }} – {{ totalPages }} of {{ totalPages }}
+  </div>
+
+  <!-- Navigation arrows like ‹ › -->
+  <div class="pagination-arrows d-flex align-items-center gap-2 pt-1">
+    <button
+      class="arrow-btn fw-bolder"
+      [disabled]="currentPage === 1"
+      (click)="goToPreviousPage()">
+      ‹
+    </button>
+    <button
+      class="arrow-btn fw-bolder"
+      [disabled]="currentPage === totalPages"
+      (click)="goToNextPage()">
+      ›
+    </button>
+  </div>
+</div>
+</div>
+          </div>
+        </td>
+      </tr>
+    </ng-container>
+  </ng-container>
+</tbody>
+    </table>
+    <p *ngIf="passedOrFailedExams.length === 0" class="text-muted text-center mt-3">
+      No completed exams found.
+    </p>
+  </div>
+</div>
