@@ -1,4 +1,10 @@
 /* 🎨 Heading */
+
+*{
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
 h2.text-primary {
   font-size: 1.9rem;
   font-weight: 700;
