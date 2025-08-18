@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -78,8 +79,17 @@ public class StudentCertificateService {
             contentStream.endText();
 
             // 📝 ExamResult (for percentage if needed)
-            ExamResult result = examResultRepository.findByExam_ExamIdAndUser_UserId(
-                exam.getExamId(), user.getUserId());
+            // ExamResult result = examResultRepository.findByExam_ExamIdAndUser_UserId(
+            //     exam.getExamId(), user.getUserId());
+Optional<ExamResult> resultOpt = examResultRepository
+    .findTopByExam_ExamIdAndUser_UserIdAndPassedIsTrueOrderByCompletedAtDesc(
+        exam.getExamId(), user.getUserId());
+
+if (resultOpt.isEmpty()) {
+    throw new RuntimeException("No passed exam attempt found for certificate generation.");
+}
+
+ExamResult result = resultOpt.get();
 
             // 👇 Text Blocks Based on ExamType
             String middleLine;

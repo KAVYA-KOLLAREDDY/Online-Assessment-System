@@ -42,11 +42,11 @@ export class LoginComponent {
           // this.loggingService.onSuccess('Logged in successfully!');
           const role = this.user().authorities;
           if (role === 'ROLE_EXAMINER') {
-            this.router.navigate(['/trainer', 'viewSubjects']);
+            this.router.navigate(['/trainer']);
           } else if (role === 'ROLE_STUDENT') {
-            this.router.navigate(['/student', 'exams']);
+            this.router.navigate(['/student']);
           } else if (role === 'ROLE_ADMIN') {
-            this.router.navigate(['/admin', 'manageExams']);
+            this.router.navigate(['/admin']);
           }
         }, () => {
           this.submitted = false;

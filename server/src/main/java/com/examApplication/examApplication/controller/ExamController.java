@@ -48,7 +48,7 @@ public class ExamController {
         return ResponseEntity.ok(examService.updateExam(examId, updatedExam));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<List<ExamDTO>> deleteExam(@PathVariable int id) {
         return ResponseEntity.ok(examService.deleteExam(id));
     }

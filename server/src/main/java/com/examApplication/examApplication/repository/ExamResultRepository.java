@@ -11,11 +11,12 @@ import com.examApplication.examApplication.entity.Exam;
 import com.examApplication.examApplication.entity.ExamResult;
 import com.examApplication.examApplication.entity.auth.User;
 
-
-
 public interface ExamResultRepository extends JpaRepository<ExamResult, Integer> {
 
     ExamResult findByExam_ExamIdAndUser_UserId(Integer examId, Integer userId);
+    
+    Optional<ExamResult> findTopByExam_ExamIdAndUser_UserIdAndPassedIsTrueOrderByCompletedAtDesc(
+    Integer examId, Integer userId);
 
     Optional<ExamResult> findByResultId(Integer id);
     

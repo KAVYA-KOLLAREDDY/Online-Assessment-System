@@ -1,10 +1,11 @@
 /* Gradient, shadowed, sticky navbar */
 .custom-navbar {
   background: linear-gradient(134deg, #9181F4 0%, #5038ED 100%);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  position: sticky !important;
+  position: fixed !important;
   top: 0;
   z-index: 1000;
+  width: 100%;
+  left:0;
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 20px;
 }
@@ -78,30 +79,6 @@
   filter: brightness(100);
 }
 
-
-/* Responsive media */
-@media screen and (max-width: 768px) {
-  .custom-navbar {
-    border-radius: 0;
-    padding: 0.8rem 1rem;
-  }
-
-  .nav-link {
-    padding: 10px 12px;
-    margin: 5px 0;
-    text-align: center;
-  }
-
-  .navbar-collapse {
-    background-color: rgba(80, 56, 237, 0.95); /* mobile bg */
-    border-radius: 0 0 20px 20px;
-    padding: 10px;
-  }
-}
-.custom-navbar {
-  animation: fadeDown 0.6s ease-in-out;
-}
-
 @keyframes fadeDown {
   from {
     transform: translateY(-20px);
@@ -111,4 +88,39 @@
     transform: translateY(0);
     opacity: 1;
   }
+}
+
+/* For screens smaller than laptop (mobile + tablet) */
+@media screen and (max-width: 991px) {
+  .custom-navbar {
+    padding: 10px 2px !important;
+  }
+
+  /* Hide brand title and hamburger toggle */
+  .navbar-brand,
+  .navbar-toggler {
+    display: none !important;
+  }
+
+  /* Hide welcome text, keep only logout */
+  .welcome-text {
+    display: none !important;
+  }
+
+  /* Keep Logout button visible and centered */
+  .navbar-collapse {
+    display: flex;
+    margin-bottom: 2px;
+  }
+
+  .nav-link {
+    margin: 0 auto;
+    padding: 7px 8px;
+  }
+}
+
+
+/* Animation remains the same */
+.custom-navbar {
+  animation: fadeDown 0.6s ease-in-out;
 }

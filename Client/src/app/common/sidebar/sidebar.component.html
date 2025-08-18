@@ -1,16 +1,17 @@
-<ng-container *ngIf="showSidebar">
-  <button
-    class="btn btn-outline-dark d-lg-none m-2 btn-gradient"
-    type="button"
-    data-bs-toggle="collapse"
-    data-bs-target="#sidebarMenu"
-    aria-expanded="false"
-    aria-controls="sidebarMenu"
-  >
-    ☰
-  </button>
+<!-- Standalone toggle button, outside any conditional or wrapper -->
+<button
+  class="btn btn-outline-dark m-2 btn-gradient toggle-btn d-block d-lg-none debug-btn"
+  type="button"
+  data-bs-toggle="offcanvas"
+  data-bs-target="#sidebarOffcanvas"
+  aria-controls="sidebarOffcanvas"
+>
+  ☰
+</button>
 
-  <nav class="sidebar collapse d-lg-block" id="sidebarMenu">
+<ng-container *ngIf="showSidebar">
+  <!-- Desktop Sidebar -->
+  <nav class="desktop-sidebar d-none d-lg-block">
     <ul>
       @if (this.menus() !== null) { 
         @for (menu of menus().menu; track $index) {
@@ -26,7 +27,6 @@
               </ul>
             </details>
           </li>
-
           <ng-template #singleLink>
             <li>
               <a [routerLink]="menu.url">{{ menu.name }}</a>
@@ -36,4 +36,42 @@
       }
     </ul>
   </nav>
+
+  <!-- Mobile Offcanvas Sidebar -->
+  <div
+    class="offcanvas offcanvas-start"
+    tabindex="-1"
+    id="sidebarOffcanvas"
+    aria-labelledby="sidebarOffcanvasLabel"
+  >
+    <div class="offcanvas-header">
+      <h5 id="sidebarOffcanvasLabel">Menu</h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body sidebar-content">
+      <ul>
+        @if (this.menus() !== null) { 
+          @for (menu of menus().menu; track $index) {
+            <li *ngIf="menu.subMenu.length > 1; else singleLinkOffcanvas">
+              <details>
+                <summary>{{ menu.name }}</summary>
+                <ul>
+                  @for (subMenu of menu.subMenu; track $index) {
+                    <li>
+                      <a [routerLink]="subMenu.url">{{ subMenu.name }}</a>
+                    </li>
+                  }
+                </ul>
+              </details>
+            </li>
+            <ng-template #singleLinkOffcanvas>
+              <li>
+                <a [routerLink]="menu.url">{{ menu.name }}</a>
+              </li>
+            </ng-template>
+          }
+        }
+      </ul>
+    </div>
+  </div>
 </ng-container>

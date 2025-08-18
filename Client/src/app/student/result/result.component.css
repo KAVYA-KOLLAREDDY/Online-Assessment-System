@@ -8,12 +8,9 @@
   -webkit-text-fill-color: transparent;
   margin-bottom: 20px;
 }
-
-
 .border {
   border-color: #ddd !important;
 }
-
 .shadow-sm {
   box-shadow: 0px 4px 8px rgba(142, 135, 135, 0.1) !important;
 }

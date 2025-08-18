@@ -24,14 +24,15 @@ h2.text-primary {
 }
 
 /* 🧾 Table Head */
-table thead tr th{
+table thead tr th {
   background: #2b2f4a;
   color: white;
   font-size: 14px;
   transition: background 0.3s ease;
 }
 
-table th, table td {
+table th,
+table td {
   padding: 14px 12px;
   vertical-align: middle;
   font-family: 'Poppins', sans-serif;
@@ -44,7 +45,11 @@ table tbody tr {
   background: #f9f9fe;
   transition: background 0.25s ease, transform 0.2s ease;
 }
-
+table tbody tr:hover {
+  background-color: #f8f9fa;
+  transform: scale(1.01);
+  transition: all 0.3s ease-in-out;
+}
 
 /* ✅ Status Badge */
 .badge {
@@ -85,12 +90,10 @@ td.text-wrap.text-break {
   background: #5038ED;
   color: #fff;
 }
-
-.btn-outline-secondary:hover{
+.btn-outline-secondary:hover {
   color: black;
   box-shadow: 0 4px 12px rgba(106, 17, 203, 0.3);
   transform: translateY(-2px);
-
 }
 
 /* 🧱 Modal Cleanup */
@@ -111,61 +114,33 @@ td.text-wrap.text-break {
   border: 2px solid #5038ED;
   box-shadow: 0 0 0 4px rgba(80, 56, 237, 0.15);
 }
+
 /* 🔮 Modal Backdrop Animation */
 .modal.show.d-block {
   animation: fadeInBackdrop 0.3s ease forwards;
 }
-
 @keyframes fadeInBackdrop {
-  from {
-    background-color: rgba(0, 0, 0, 0);
-  }
-  to {
-    background-color: rgba(0, 0, 0, 0.5);
-  }
+  from { background-color: rgba(0, 0, 0, 0); }
+  to { background-color: rgba(0, 0, 0, 0.5); }
 }
 
 /* 🎬 Modal Content Animation */
 .modal-content {
   animation: slideFadeUp 0.35s ease forwards;
   transform-origin: center center;
-  border-radius: 12px;
   box-shadow: 0 12px 28px rgba(80, 56, 237, 0.15);
   border: 1px solid #e4e4f0;
 }
-
-/* 💫 Animation Keyframes */
 @keyframes slideFadeUp {
-  0% {
-    opacity: 0;
-    transform: translateY(40px) scale(0.96);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0px) scale(1);
-  }
-}
-
-/* 🧼 Optional: Button Hover Effects */
-.modal-footer .btn-primary:hover {
-  background-color: #5038ED;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(80, 56, 237, 0.2);
-  transition: all 0.2s ease-in-out;
-}
-
-.modal-footer .btn-secondary:hover {
-  background-color: #6c757d;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  0% { opacity: 0; transform: translateY(40px) scale(0.96); }
+  100% { opacity: 1; transform: translateY(0px) scale(1); }
 }
 
 /* 📱 Responsive */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   table thead {
     display: none;
   }
-
   table tbody tr {
     display: block;
     background: #fff;
@@ -173,30 +148,36 @@ td.text-wrap.text-break {
     border-radius: 10px;
     box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
     padding: 12px;
-    transition: transform 0.2s ease;
   }
-
-  table tbody tr:hover {
-    transform: scale(1.01);
-  }
-
   table tbody td {
     display: flex;
     justify-content: space-between;
     padding: 10px 14px;
     border: none;
     font-size: 13px;
+    text-align: left;
   }
-
   td::before {
     content: attr(data-label);
     font-weight: 600;
     color: #5038ED;
     margin-right: 10px;
+    flex: 1;
   }
-
   .btn {
     width: 100%;
     margin-top: 6px;
+  }
+}
+
+@media (max-width: 576px) {
+  h2.text-primary {
+    font-size: 1.4rem;
+  }
+  .modal-dialog {
+    margin: 0.5rem;
+  }
+  .modal-content {
+    font-size: 13px;
   }
 }

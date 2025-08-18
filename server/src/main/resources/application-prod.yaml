@@ -21,6 +21,6 @@ certificate:
 
 jwt:
   access-token:
-    expiration: 15m
+    expiration: 30m
   refresh-token:
     expiration: 7d # 7 days

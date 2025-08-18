@@ -119,7 +119,11 @@ export class ManageSubtopicsComponent implements OnInit {
       this.showSubtopicForm = false;
       this.loadSubtopics(this.subject().subjectId);
     },
-    error: (err) => console.error('Failed to create subtopic:', err)
+    error: (err) => {
+      this.toaster.onError('Failed to create subtopic' + err);
+      console.error('Failed to create subtopic:', err);
+    }
+     
   });
 }
 

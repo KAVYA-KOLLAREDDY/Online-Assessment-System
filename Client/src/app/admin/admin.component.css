@@ -3,7 +3,6 @@
   min-height: 100vh;
   background: #f5f6fa;
   font-family: 'Poppins', sans-serif;
-  overflow: hidden;
 }
 
 .sidebar-wrapper {
@@ -17,24 +16,35 @@
 .main-content-area {
   flex-grow: 1;
   padding: 10px 32px;
+  margin-top: 70px !important;
   animation: fadeIn 0.5s ease;
   overflow-y: auto;
-  min-height: 100vh;
   background-color: #f9f9fe;
-}
-
-/* Smooth fade-in on page load */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
+  position: relative;
+  overflow: visible !important;
 }
 
 /* Responsive Adjustments */
-@media (max-width: 768px) {
-  .sidebar-wrapper {
-    display: none; /* You can later replace this with a collapsible mobile sidebar */
-  }
+@media (max-width: 991px) {
   .main-content-area {
     padding: 20px;
+    width: 100%;
   }
+  .sidebar-wrapper {
+  width: 0px;
+  background-color: transparent;
+  border-right:none;
+  box-shadow: none;
+}
+}
+
+@media (min-width: 992px) {
+  .sidebar-wrapper {
+    width: 250px;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }

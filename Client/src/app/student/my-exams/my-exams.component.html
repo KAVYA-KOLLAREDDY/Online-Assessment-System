@@ -3,7 +3,7 @@
 
   <div class="table-responsive mt-4 shadow-lg p-4 bg-light rounded">
     <table class="table table-bordered text-center align-middle">
-      <thead class="table-dark">
+      <thead class="table-dark table-responsive">
         <tr>
           <th>Exam Name</th>
           <th>Total Marks</th>
@@ -16,15 +16,15 @@
   <ng-container *ngFor="let exam of passedOrFailedExams; let i = index">
     <ng-container *ngIf="!activeResultId || activeResultId === exam.resultId">
       <tr>
-        <td>{{ exam.title }}</td>
-        <td>{{ exam.totalMarks }}</td>
-        <td>{{ exam.obtainedMarks }}</td>
-        <td>
+        <td data-label="Exam Name">{{ exam.title }}</td>
+        <td data-label="Total Marks">{{ exam.totalMarks }}</td>
+        <td data-label="Obtained Marks">{{ exam.obtainedMarks }}</td>
+        <td data-label="Result">
           <span class="badge" [ngClass]="getResultBadge(exam)">
             {{ getResultText(exam) }}
           </span>
         </td>
-        <td>
+        <td data-label="Report">
           <button class="btn btn-outline-primary btn-sm" (click)="toggleReport(exam)">
             {{ activeResultId === exam.resultId ? 'Hide Report' : 'View Detailed Report' }}
           </button>
@@ -91,8 +91,8 @@
     </div>
   </div>
 </div>
-            <div *ngSwitchCase="'Topic Analysis'">
-              <table class="table table-bordered">
+            <div *ngSwitchCase="'Topic Analysis'" class="table-responsive">
+              <table class="table table-bordered table-responsive">
                 <thead class="table-light">
                   <tr>
                     <th>Topic</th>
@@ -103,10 +103,10 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let topic of selectedExamReport?.topics">
-                    <td>{{ topic.topic }}</td>
-                    <td>{{ topic.totalQuestions }}</td>
-                    <td>{{ topic.correctQuestions }}</td>
-                    <td>{{ topic.percentage }}%</td>
+                    <td data-label="Topic">{{ topic.topic }}</td>
+                    <td data-label="Total Questions">{{ topic.totalQuestions }}</td>
+                    <td data-label="Correct Questions">{{ topic.correctQuestions }}</td>
+                    <td data-label="Percentage">{{ topic.percentage }}%</td>
                   </tr>
                 </tbody>
               </table>
@@ -122,10 +122,10 @@
     </div>
   </div>
             </div>
-<div *ngSwitchCase="'Difficulty Level'">
+<div *ngSwitchCase="'Difficulty Level'" class="table-responsive">
 <div *ngFor="let topic of difficultyData" class="mb-4">
   <h5 class="fw-bold text-primary mt-3">{{ topic.subtopic }}</h5>
-  <table class="table table-sm table-bordered text-center">
+  <table class="table table-sm table-bordered text-center table-responsive">
     <thead class="table-light">
       <tr>
         <th>Difficulty</th>
@@ -137,18 +137,18 @@
     </thead>
     <tbody>
       <tr *ngFor="let stat of topic.difficultyStats">
-        <td>{{ stat.level }}</td>
-        <td>{{ stat.totalQuestions }}</td>
-        <td>{{ stat.totalMarks }}</td>
-        <td>{{ stat.correct }} / {{ stat.incorrect }}</td>
-        <td>{{ stat.marksObtained }}</td>
+        <td data-label="Difficulty Level">{{ stat.level }}</td>
+        <td data-label="Total Questions">{{ stat.totalQuestions }}</td>
+        <td data-label="Total Marks">{{ stat.totalMarks }}</td>
+        <td data-label="Correct / Incorrect">{{ stat.correct }} / {{ stat.incorrect }}</td>
+        <td data-label="Marks Obtained">{{ stat.marksObtained }}</td>
       </tr>
     </tbody>
   </table>
 </div>
             </div>
-            <div *ngSwitchCase="'Question Analysis'">
-  <table class="table table-bordered">
+            <div *ngSwitchCase="'Question Analysis'" class="table-responsive">
+  <table class="table table-bordered table-responsive">
     <thead class="table-light">
       <tr>
         <th>#</th>
@@ -161,8 +161,8 @@
     <tbody>
       <tr *ngFor="let q of paginatedQuestions; let i = index">
         <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
-        <td>{{ q.questionText }}</td>
-        <td>
+        <td data-label="Question Text">{{ q.questionText }}</td>
+        <td data-label="Difficulty Level">
           <span class="badge" [ngClass]="{
             'text-success': q.difficultyLevel === 'Basic',
             'text-primary': q.difficultyLevel === 'Intermediate',
@@ -171,12 +171,12 @@
             {{ q.difficultyLevel }}
           </span>
         </td>
-        <td>
+        <td data-label="Your Answer">
           <ul class="list-unstyled mb-0">
             <li *ngFor="let ans of q.selectedAnswers"><span class="fs-5 text-warning">★  </span>{{  ans }}</li>
           </ul>
         </td>
-        <td> 
+        <td data-label="Correct Answer"> 
           <ul class="list-unstyled mb-0">
             <li *ngFor="let ans of q.correctAnswers">✔️ {{ ans }}</li>
           </ul>
