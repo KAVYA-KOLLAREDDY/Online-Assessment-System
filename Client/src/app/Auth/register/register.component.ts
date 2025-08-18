@@ -20,6 +20,7 @@ export class RegisterComponent {
   password: string = '';
   private loggingService = inject(LoggingService);
 
+  private router = inject(Router);
   constructor(private route: ActivatedRoute, private authService: ExamService) {
     // Get the dynamic role from the URL
     this.role = this.route.snapshot.paramMap.get('role') || '';
@@ -36,6 +37,7 @@ export class RegisterComponent {
 
     this.authService.register(registrationData, this.role).subscribe(handleResposne(this.loggingService, (response) => {
       this.loggingService.onSuccess("Registration Successful!");
+      this.router.navigate(['/login']);
     }))
   }
   

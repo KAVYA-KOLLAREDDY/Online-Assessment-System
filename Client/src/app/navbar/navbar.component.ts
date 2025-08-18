@@ -32,7 +32,7 @@ export class NavbarComponent {
   onLogout() {
     this.authService.logout().subscribe(
       handleResposne(this.loggingService, (data) => {
-        // this.loggingService.onInfo('Logged Out Successfully!');
+        this.loggingService.onInfo('Logged Out Successfully!');
         this.router.navigate(['/login']);
       })
     );

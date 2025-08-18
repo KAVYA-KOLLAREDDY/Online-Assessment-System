@@ -32,7 +32,7 @@
 
 /* Card Header */
 .exam-card .card-header {
-  background: #f7f6ff;
+  background: #ffffff;
   font-weight: 600;
   font-size: 1rem;
   border-bottom: 1px solid #ddd;
@@ -40,7 +40,7 @@
 }
 
 .exam-card .card-header:hover{
-  background-color: white !important;
+  background-color: #f7f6ff !important;
 }
 
 .exam-card .card-header .btn {
@@ -225,23 +225,95 @@
   padding: 10px 16px;
 }
 
+/* Existing Styles Remain Same Above */
 
-/* Responsive Design */
+/* Full Responsive Design */
+@media (max-width: 992px) {
+  .exam-card .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .exam-card .card-header .btn {
+    width: 100%;
+  }
+}
+
 @media (max-width: 768px) {
+  .exams-container {
+    padding: 1rem;
+  }
+
   .exams-container h2 {
     font-size: 1.5rem;
+    text-align: center;
   }
 
   .accordion-body {
     padding: 1rem;
   }
 
-  .accordion-body input[type="number"] {
+  /* Inputs stack on smaller devices */
+  .accordion-body .d-flex {
+    flex-direction: column !important;
+    gap: 1rem;
+  }
+  .accordion-body input[type="number"],
+  .accordion-body select {
     width: 100% !important;
+    max-width: 100% !important;
   }
 
-  .btn-sm {
+  /* Buttons full width on small screens */
+  .btn-sm,
+  .accordion-body .btn-success {
     width: 100%;
     margin-top: 8px;
+  }
+
+  /* Table responsive stacking */
+  .table thead {
+    display: none;
+  }
+  .table tbody tr {
+    display: block;
+    background: white;
+    margin-bottom: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    padding: 10px;
+  }
+  .table tbody td {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 12px;
+    border: none;
+    text-align: left;
+  }
+  .table tbody td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #5038ED;
+    flex: 1;
+    max-width: 50%;
+  }
+  .table input {
+    max-width: 150px;
+  }
+}
+
+@media (max-width: 576px) {
+  .exams-container h2 {
+    font-size: 1.3rem;
+  }
+  .accordion-body {
+    padding: 0.75rem;
+  }
+  .table tbody td {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .table tbody td::before {
+    margin-bottom: 4px;
   }
 }

@@ -9,18 +9,18 @@ export class LoggingService {
    private toastr = inject(ToastrService);
 
   onSuccess(message: string) {
-    this.toastr.success(message, 'Message');
+    this.toastr.success(message);
   }
 
   onInfo(message: string) {
-    this.toastr.info(message, 'Message');
+    this.toastr.info(message);
   }
 
   onWarning(message: string) {
-    this.toastr.warning(message, 'Message');
+    this.toastr.warning(message);
   }
 
   onError(message: string) {
-    this.toastr.error(message, 'Message');
+    this.toastr.error(message);
   }
 }

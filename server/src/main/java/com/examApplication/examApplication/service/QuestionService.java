@@ -303,135 +303,133 @@ public class QuestionService {
     return updatedList;
 }
 
-    public void uploadSubTopicsWithQuestions(ExamUploadDTO dto) {
-        try (XSSFWorkbook workbook = new XSSFWorkbook(dto.getFile().getInputStream())) {
+@Transactional
+public void uploadSubTopicsWithQuestions(ExamUploadDTO dto) {
+    try (XSSFWorkbook workbook = new XSSFWorkbook(dto.getFile().getInputStream())) {
 
-            Subject subject = subjectRepository.findById(dto.getSubjectId())
-                    .orElseThrow(() -> new RuntimeException("Subject not found"));
-            Sheet sheet = workbook.getSheetAt(0);
-        
-            User currentUser = authService.getUser();
+        Subject subject = subjectRepository.findById(dto.getSubjectId())
+                .orElseThrow(() -> new RuntimeException("Subject not found"));
+        Sheet sheet = workbook.getSheetAt(0);
+    
+        User currentUser = authService.getUser();
 
-            Exam exam = new Exam();
-            exam.setTitle(dto.getTitle());
-            exam.setDescription(dto.getDescription());
-            exam.setStartTime(dto.getStartTime());
-            exam.setEndTime(dto.getEndTime());
-            exam.setDuration(dto.getDuration());
-            exam.setSubject(subject);
-            exam.setCreatedBy(currentUser);
+        Exam exam = new Exam();
+        exam.setTitle(dto.getTitle());
+        exam.setDescription(dto.getDescription());
+        exam.setStartTime(dto.getStartTime());
+        exam.setEndTime(dto.getEndTime());
+        exam.setDuration(dto.getDuration());
+        exam.setSubject(subject);
+        exam.setCreatedBy(currentUser);
 
-            // ✅ Set exam status based on date logic (inline)
-            LocalDate today = LocalDate.now();
-            if (today.isBefore(dto.getStartTime())) {
-                exam.setExamStatus(ExamStatus.SCHEDULED);
-            } else if (today.isAfter(dto.getEndTime())) {
-                exam.setExamStatus(ExamStatus.COMPLETED);
-            } else {
-                exam.setExamStatus(ExamStatus.ONGOING);
-            }
- 
-            System.out.println("DTO startTime: " + dto.getStartTime());
-            System.out.println("DTO endTime: " + dto.getEndTime());
-
-            Exam savedExam = examRepository.save(exam);
-
-            for (Row row : sheet) {
-                if (row.getRowNum() == 0)
-                    continue;
-
-                Cell subtopicCell = row.getCell(0);
-                if (subtopicCell == null || subtopicCell.getCellType() == CellType.BLANK) {
-                    System.out.println("Subtopic ID is missing at row " + row.getRowNum());
-                    continue;
-                }
-                long subtopicId = (long) subtopicCell.getNumericCellValue();
-
-                if (subtopicId <= 0) {
-                    System.out.println("Invalid Subtopic ID: " + subtopicId);
-                    continue; // Skip this row if invalid ID
-                }
-
-                SubTopic topic = subtopicRepo.findById(subtopicId)
-                        .orElseThrow(() -> new RuntimeException("Invalid Subtopic id" + subtopicId));
-
-                boolean exists = subtopicRepo.existsByNameAndSubject(topic.getName(), subject);
-                if (!exists) {
-                    throw new RuntimeException("SubTopic not found");
-                }
-
-                String questionText = row.getCell(1).getStringCellValue();
-                String qType = row.getCell(3).getStringCellValue();
-                String difficultyLevel = row.getCell(4).getStringCellValue();
-                int marks = (int) row.getCell(row.getLastCellNum() - 1).getNumericCellValue();
-
-                String correctOptionLetter = row.getCell(row.getLastCellNum() - 2).getStringCellValue();
-                List<String> correctOptions = parseCorrectOptions(correctOptionLetter);
-                System.out.println("Correct Options : " + correctOptions);
-
-                List<String> options = new ArrayList<>();
-                for (int i = 5; i < row.getLastCellNum() - 2; i++) {
-                    Cell cell = row.getCell(i);
-                    if (cell == null || cell.getCellType() == CellType.BLANK)
-                        break;
-                    String value = "";
-                    switch (cell.getCellType()) {
-                        case STRING:
-                            value = cell.getStringCellValue().trim();
-                            break;
-                        case NUMERIC:
-                            value = String.valueOf(cell.getNumericCellValue()).trim();
-                            break;
-                        case BOOLEAN:
-                            value = String.valueOf(cell.getBooleanCellValue()).trim();
-                            break;
-                        default:
-                            value = "";
-                    }
-
-                    options.add(value);
-                }
-
-                System.out.println("Options : " + options);
-
-                Set<Integer> correctIndexes = Arrays.stream(correctOptionLetter.split(","))
-                        .map(String::trim)
-                        .map(letter -> letter.charAt(0) - 'A')
-                        .filter(index -> index >= 0 && index < options.size())
-                        .collect(Collectors.toSet());
-
-                if (correctIndexes.isEmpty()) {
-                    throw new RuntimeException("No valid correct options provided for: " + questionText);
-                }
-
-                Question question = new Question();
-                question.setQuestionText(questionText);
-                question.setQuestionType(QuestionType.valueOf(qType));
-                question.setDifficultyLevel(DifficultyLevel.valueOf(difficultyLevel));
-                question.setMarks(marks);
-                question.setSubtopic(topic);
-                question.setExam(exam);
-
-                System.out.println("Options Size : " + options.size());
-                for (int i = 0; i < options.size(); i++) {
-                    QuestionOption option = new QuestionOption();
-                    option.setOptionText(options.get(i));
-                    option.setIsCorrect(correctIndexes.contains(i));
-                    question.addQuestionOption(option);
-                }
-
-                savedExam.addQuestion(question);
-            }
-
-            examRepository.save(savedExam);
-
-        } catch (IOException e) {
-            throw new RuntimeException("Error processing file " + e.getMessage());
-        } catch (IllegalStateException ie) {
-            throw new RuntimeException("Please upload xl by checking the data format!");
+        // ✅ Set exam status based on date logic (inline)
+        LocalDate today = LocalDate.now();
+        if (today.isBefore(dto.getStartTime())) {
+            exam.setExamStatus(ExamStatus.SCHEDULED);
+        } else if (today.isAfter(dto.getEndTime())) {
+            exam.setExamStatus(ExamStatus.COMPLETED);
+        } else {
+            exam.setExamStatus(ExamStatus.ONGOING);
         }
-    }
 
+        System.out.println("DTO startTime: " + dto.getStartTime());
+        System.out.println("DTO endTime: " + dto.getEndTime());
+
+        // ❌ Removed early save here
+
+        for (Row row : sheet) {
+            if (row.getRowNum() == 0)
+                continue;
+
+            Cell subtopicCell = row.getCell(0);
+            if (subtopicCell == null || subtopicCell.getCellType() == CellType.BLANK) {
+                throw new RuntimeException("Subtopic ID is missing at row " + (row.getRowNum() + 1));
+            }
+            long subtopicId = (long) subtopicCell.getNumericCellValue();
+
+            if (subtopicId <= 0) {
+                throw new RuntimeException("Invalid Subtopic ID at row " + (row.getRowNum() + 1));
+            }
+
+            SubTopic topic = subtopicRepo.findById(subtopicId)
+                    .orElseThrow(() -> new RuntimeException("Invalid Subtopic id " + subtopicId));
+
+            boolean exists = subtopicRepo.existsByNameAndSubject(topic.getName(), subject);
+            if (!exists) {
+                throw new RuntimeException("SubTopic not found: " + topic.getName());
+            }
+
+            String questionText = row.getCell(1).getStringCellValue();
+            String qType = row.getCell(3).getStringCellValue();
+            String difficultyLevel = row.getCell(4).getStringCellValue();
+            int marks = (int) row.getCell(row.getLastCellNum() - 1).getNumericCellValue();
+
+            String correctOptionLetter = row.getCell(row.getLastCellNum() - 2).getStringCellValue();
+            List<String> correctOptions = parseCorrectOptions(correctOptionLetter);
+            System.out.println("Correct Options : " + correctOptions);
+
+            List<String> options = new ArrayList<>();
+            for (int i = 5; i < row.getLastCellNum() - 2; i++) {
+                Cell cell = row.getCell(i);
+                if (cell == null || cell.getCellType() == CellType.BLANK)
+                    break;
+                String value = "";
+                switch (cell.getCellType()) {
+                    case STRING:
+                        value = cell.getStringCellValue().trim();
+                        break;
+                    case NUMERIC:
+                        value = String.valueOf(cell.getNumericCellValue()).trim();
+                        break;
+                    case BOOLEAN:
+                        value = String.valueOf(cell.getBooleanCellValue()).trim();
+                        break;
+                    default:
+                        value = "";
+                }
+                options.add(value);
+            }
+
+            System.out.println("Options : " + options);
+
+            Set<Integer> correctIndexes = Arrays.stream(correctOptionLetter.split(","))
+                    .map(String::trim)
+                    .map(letter -> letter.charAt(0) - 'A')
+                    .filter(index -> index >= 0 && index < options.size())
+                    .collect(Collectors.toSet());
+
+            if (correctIndexes.isEmpty()) {
+                throw new RuntimeException("No valid correct options provided for: " + questionText);
+            }
+
+            Question question = new Question();
+            question.setQuestionText(questionText);
+            question.setQuestionType(QuestionType.valueOf(qType));
+            question.setDifficultyLevel(DifficultyLevel.valueOf(difficultyLevel));
+            question.setMarks(marks);
+            question.setSubtopic(topic);
+            question.setExam(exam);
+
+            System.out.println("Options Size : " + options.size());
+            for (int i = 0; i < options.size(); i++) {
+                QuestionOption option = new QuestionOption();
+                option.setOptionText(options.get(i));
+                option.setIsCorrect(correctIndexes.contains(i));
+                question.addQuestionOption(option);
+            }
+
+            exam.addQuestion(question);
+        }
+
+        // ✅ Save exam only after all questions are processed successfully
+        examRepository.save(exam);
+
+    } catch (IOException e) {
+        throw new RuntimeException("Error processing file " + e.getMessage());
+    } catch (IllegalStateException ie) {
+        throw new RuntimeException("Please upload xl by checking the data format!");
+    }
+}
     public static List<String> parseCorrectOptions(String correctOptionInput) {
         correctOptionInput = correctOptionInput.trim();
 

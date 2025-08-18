@@ -201,3 +201,88 @@
   box-shadow: 0 0 10px rgba(106, 17, 203, 0.3);
 }
   
+/* Base Responsive Table Handling */
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Make table cells wrap text instead of stretching */
+.table td, 
+.table th {
+  white-space: normal !important;
+  word-break: break-word;
+}
+
+/* Chart container responsive fix */
+.chart-container {
+  width: 100% !important;
+  max-width: 100%;
+  padding: 10px;
+}
+
+/* Adjust padding and font sizes for mobile */
+@media (max-width: 992px) {
+  .gradient-heading {
+    font-size: 1.5rem;
+  }
+  .table td, .table th {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .table thead {
+    display: none; /* Hide header on mobile */
+  }
+
+  .table tr {
+    display: block;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    background: #fff;
+  }
+
+  .table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    border: none !important;
+    background: transparent !important;
+    font-size: 14px;
+  }
+
+  /* Add labels before cell content */
+  .table td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    color: #555;
+    flex: 1;
+    text-align: left;
+  }
+}
+
+/* Small phone fix */
+@media (max-width: 480px) {
+  .gradient-heading {
+    font-size: 1.3rem;
+  }
+  .table td, .table th {
+    font-size: 13px;
+  }
+  .btn-outline-primary.btn-sm {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+}
+@media (max-width: 576px) {
+.card {
+    min-width: auto;
+    white-space: normal;
+    text-align: left;
+  }
+}

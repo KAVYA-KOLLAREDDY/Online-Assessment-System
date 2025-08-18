@@ -1,3 +1,6 @@
+/* =============================
+   Container Base
+============================= */
 .subtopic-container {
   background: #ffffff;
   padding: 1.5rem;
@@ -5,23 +8,29 @@
   box-shadow: 0 12px 25px rgba(80, 56, 237, 0.1);
   font-family: 'Poppins', sans-serif;
   max-width: 2000px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.subtopic-container:hover {
+  transform: scale(1.01);
+  box-shadow: 0 14px 28px rgba(80, 56, 237, 0.15);
 }
 
-/* Form Animation */
+/* =============================
+   Form Animation
+============================= */
 .animated-form {
   animation: fadeIn 0.4s ease;
-  /* border-left: 4px solid #5038ED; */
   border: 1px solid rgb(167, 166, 166);
   background-color: #f9f7ff;
   padding: 20px;
   border-radius: 12px;
   margin-top: 1rem;
   box-shadow: 0 6px 16px rgba(80, 56, 237, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
-.btn-primary{
-  background: #5038ED;
-      color: white;
+.animated-form:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(80, 56, 237, 0.1);
 }
 
 @keyframes fadeIn {
@@ -35,7 +44,40 @@
   }
 }
 
-/* Validation Styling */
+/* =============================
+   Buttons
+============================= */
+.btn {
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.25s ease-in-out;
+}
+
+.btn-primary {
+  background: #5038ED;
+  color: white;
+}
+.btn-primary:hover {
+  background: #3f2ccc;
+  box-shadow: 0 4px 12px rgba(80, 56, 237, 0.25);
+  transform: translateY(-2px);
+}
+
+.btn-success:hover {
+  background: #28a745;
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.25);
+  transform: translateY(-2px);
+}
+
+.btn-outline-secondary:hover {
+  background: #e0e0e0;
+  color: #000;
+  transform: translateY(-2px);
+}
+
+/* =============================
+   Validation Error
+============================= */
 .validation-error {
   font-size: 0.75rem;
   margin-top: 4px;
@@ -44,15 +86,16 @@
   align-items: center;
   gap: 6px;
 }
-
 .validation-error::before {
   content: "⚠️";
 }
 
-/* Table Styling */
-table thead th{
-    background: #2b2f4a;
-    color:white;
+/* =============================
+   Table Styling
+============================= */
+table thead th {
+  background: #2b2f4a;
+  color: white;
 }
 
 .table th, .table td {
@@ -60,6 +103,31 @@ table thead th{
   font-size: 14px;
 }
 
+.table tbody tr {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.table tbody tr:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+  background-color: #f5f3ff;
+}
+
+/* =============================
+   Gradient Heading
+============================= */
+.gradient-heading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  background: black;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: letter-spacing 0.3s ease;
+}
+
+
+/* =============================
+   Mobile Responsive
+============================= */
 @media (max-width: 768px) {
   .subtopic-container {
     padding: 1.5rem;
@@ -76,7 +144,7 @@ table thead th{
   }
 
   .table thead {
-    display: none; /* Hide headers */
+    display: none;
   }
 
   .table tbody tr {
@@ -112,14 +180,4 @@ table thead th{
   .text-end {
     text-align: center !important;
   }
-}
-
-.gradient-heading {
-  font-size: 1.5rem;
-  font-weight: 700;
-  text-align: center;
-  background: black;
-  /* background: linear-gradient(to right, #6a11cb, #2575fc); */
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }

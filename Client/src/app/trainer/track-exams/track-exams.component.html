@@ -1,21 +1,43 @@
-<div class="container mt-2">
-  <h2 class="text-center fw-bold text-primary mb-4">📊 Exam Results</h2>
+<div class="container mt-2 exam-results-container">
+  <h2 class="page-title">📊 Exam Results</h2>
 
-  @if (examResults().length > 0) {
-    <div class="table-responsive shadow-lg rounded-4 p-4 bg-white">
-      <table class="table table-hover table-bordered align-middle text-center">
-        <thead class="table-dark">
-          <tr>
-            <th>👨‍🎓 Student Name</th>
-            <th>📘 Exam Title</th>
-            <th>🎯 Total Marks</th>
-            <th>📏 Obtained Marks</th>
-            <th>📊 Percentage</th>
-            <th>🎉 Result</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let result of examResults()">
+  <!-- Filters -->
+  <div class="row g-3 mb-4 filter-row">
+    <div class="col-md-4 col-sm-12">
+      <input type="text" class="form-control"
+             placeholder="🔍 Search by name, exam or result"
+             (input)="searchTerm.set($any($event.target).value)">
+    </div>
+    <div class="col-md-4 col-sm-12">
+      <select class="form-select" (change)="selectedStudent.set($any($event.target).value)">
+        <option value="">👨‍🎓 Filter by Student</option>
+        <option *ngFor="let name of studentNames" [value]="name">{{ name }}</option>
+      </select>
+    </div>
+    <div class="col-md-4 col-sm-12">
+      <select class="form-select" (change)="selectedExam.set($any($event.target).value)">
+        <option value="">📘 Filter by Exam</option>
+        <option *ngFor="let exam of examNames" [value]="exam">{{ exam }}</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Results Table -->
+  <div class="table-responsive results-table-container">
+    <table class="table table-hover table-bordered align-middle text-center">
+      <thead class="table-dark">
+        <tr>
+          <th>👨‍🎓 Student Name</th>
+          <th>📘 Exam Title</th>
+          <th>🎯 Total Marks</th>
+          <th>📏 Obtained Marks</th>
+          <th>📊 Percentage</th>
+          <th>🎉 Result</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngIf="filteredResults().length > 0; else noResults">
+          <tr *ngFor="let result of paginatedResults()" class="fade-in-row">
             <td class="fw-medium text-capitalize">{{ result.studentName || 'N/A' }}</td>
             <td class="fw-medium text-capitalize">{{ result.examName || 'N/A' }}</td>
             <td class="fw-bold text-secondary">{{ result.totalMarks ?? '0' }}</td>
@@ -32,15 +54,43 @@
                   'text-success': result.isQualified === true,
                   'text-danger': result.isQualified === false
                 }">
-                {{ result.isQualified ? '✅ Passed' : '❌ Failed' }}
+              {{ result.isQualified ? '✅ Passed' : '❌ Failed' }}
             </td>
           </tr>
-        </tbody>
-      </table>
-    </div>
-  } @else {
-    <div class="alert alert-warning text-center mt-4 fs-5 shadow-sm">
-      ⚠️ No Exam Records Found.
-    </div>
-  }
+        </ng-container>
+
+        <!-- No Results -->
+        <ng-template #noResults>
+          <tr>
+            <td colspan="6" class="no-results">
+              <div class="no-results-content">
+                <span class="no-results-icon">📭</span>
+                <p>No exam results match your search criteria.</p>
+                <small>Try adjusting filters or search terms.</small>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Pagination -->
+<div class="d-flex justify-content-end align-items-center gap-4 mt-3 pagination-wrapper">
+  <div class="fw-bolder pt-2">
+    {{ getStartItem() }} – {{ getEndItem() }} of {{ filteredResults().length }}
+  </div>
+  <div class="pagination-arrows d-flex align-items-center gap-2 pt-1"> 
+    <button class="arrow-btn fw-bolder"
+            [disabled]="currentPage() === 1"
+            (click)="prevPage()">
+      <span>&lsaquo;</span>
+    </button>
+    <button class="arrow-btn fw-bolder"
+            [disabled]="currentPage() === totalPages()"
+            (click)="nextPage()">
+      <span>&rsaquo;</span>
+    </button>
+  </div>
 </div>

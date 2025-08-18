@@ -77,33 +77,48 @@
             [ Please select exactly {{ requiredMsqCount }} option(s) ]
           </div>
           <div class="list-group">
-            <div
-              class="list-group-item border-0 py-2 d-flex align-items-center"
-              *ngFor="let option of currentQuestion.options"
-            >
-              <ng-container *ngIf="currentQuestion.questionType === 'MSQ'; else singleOption">
-                <input
-                  type="checkbox"
-                  class="form-check-input me-3"
-                  [checked]="isOptionSelected(currentQuestion.questionId, option.optionId)"
-                  (change)="selectAnswer(currentQuestion.questionId, option.optionId)"
-                  [disabled]="(currentQuestion.questionType === 'MSQ' &&
-                    !isOptionSelected(currentQuestion.questionId, option.optionId) &&
-                    selectedArray.length >= requiredMsqCount)"
-                />
-              </ng-container>
-              <ng-template #singleOption>
-                <input
-                  type="radio"
-                  class="form-check-input me-3"
-                  [name]="'question_' + currentQuestion.questionId"
-                  [checked]="selectedAnswers[currentQuestion.questionId] === option.optionId"
-                  (change)="selectAnswer(currentQuestion.questionId, option.optionId)"
-                />
-              </ng-template>
-              <label class="form-check-label fs-5">{{ option.optionText }}</label>
-            </div>
-          </div>
+  <div
+    class="list-group-item border-0 py-2 d-flex align-items-center"
+    *ngFor="let option of currentQuestion.options; let idx = index"
+  >
+    <ng-container *ngIf="currentQuestion.questionType === 'MSQ'; else singleOption">
+      <input
+        type="checkbox"
+        class="form-check-input me-3"
+        [id]="'option_' + currentQuestion.questionId + '_' + idx"
+        [checked]="isOptionSelected(currentQuestion.questionId, option.optionId)"
+        (change)="selectAnswer(currentQuestion.questionId, option.optionId)"
+        [disabled]="(currentQuestion.questionType === 'MSQ' &&
+          !isOptionSelected(currentQuestion.questionId, option.optionId) &&
+          selectedArray.length >= requiredMsqCount)"
+      />
+      <label
+        class="form-check-label fs-5 flex-grow-1 cursor-pointer"
+        [for]="'option_' + currentQuestion.questionId + '_' + idx"
+      >
+        {{ option.optionText }}
+      </label>
+    </ng-container>
+
+    <ng-template #singleOption>
+      <input
+        type="radio"
+        class="form-check-input me-3"
+        [id]="'option_' + currentQuestion.questionId + '_' + idx"
+        [name]="'question_' + currentQuestion.questionId"
+        [checked]="selectedAnswers[currentQuestion.questionId] === option.optionId"
+        (change)="selectAnswer(currentQuestion.questionId, option.optionId)"
+      />
+      <label
+        class="form-check-label fs-5 flex-grow-1 cursor-pointer"
+        [for]="'option_' + currentQuestion.questionId + '_' + idx"
+      >
+        {{ option.optionText }}
+      </label>
+    </ng-template>
+  </div>
+</div>
+
           
         </div>
         <div class="mt-4 mx-2 mb-5 d-flex justify-content-between gap-4">

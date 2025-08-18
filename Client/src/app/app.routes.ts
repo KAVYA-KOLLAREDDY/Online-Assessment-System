@@ -43,6 +43,11 @@ export const routes: Routes = [
     canActivateChild: [studentChildGuard],
     children: [
       {
+        path: '',
+        redirectTo:'studentDashboard',
+        pathMatch:'full',
+      },
+      {
         path: 'studentDashboard',
         component: DashboardComponent,
       },
@@ -94,7 +99,9 @@ export const routes: Routes = [
         path: 'viewSubjects',
         component: ViewSubjectsComponent,
       },
-    ],
+      { path: '', redirectTo: 'manageUsers', pathMatch: 'full' }
+
+    ]
   },
   {
     path: 'trainer',
@@ -102,6 +109,11 @@ export const routes: Routes = [
     canActivate: [examinerGuard],
     canActivateChild: [examinerChildGuard],
     children: [
+      {
+        path: '',
+        redirectTo:'viewSubjects',
+        pathMatch:'full'
+      },
       {
         path: 'viewSubjects',
         component: ViewSubjectsComponent,

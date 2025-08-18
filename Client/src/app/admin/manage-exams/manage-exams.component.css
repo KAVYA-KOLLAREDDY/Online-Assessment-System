@@ -1,8 +1,7 @@
 /* ---------- Layout ---------- */
 .exam-management-card {
-  background-color: #fff;
-  border-radius: 16px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+  background-color: transparent;
+ 
 }
 
 /* ---------- Header ---------- */
@@ -43,9 +42,13 @@
   padding: 12px;
 }
 
+/* Row Hover Animation */
+.custom-table tbody tr {
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
 .custom-table tbody tr:hover {
   background-color: #f0f8ff;
-  transition: 0.3s ease;
+  transform: scale(1.01);
 }
 
 /* ---------- Buttons ---------- */
@@ -61,7 +64,7 @@
 }
 .btn-view:hover {
   background-color: #019c7a;
-  transform: translateY(-1px);
+  transform: translateY(-2px) scale(1.05);
 }
 
 .btn-delete {
@@ -76,7 +79,7 @@
 }
 .btn-delete:hover {
   background-color: #c0392b;
-  transform: translateY(-1px);
+  transform: translateY(-2px) scale(1.05);
 }
 
 /* ---------- Modal Styling ---------- */
@@ -119,7 +122,7 @@
 }
 .btn-close-modal:hover {
   background-color: #6c7a92;
-  transform: translateY(-1px);
+  transform: translateY(-2px) scale(1.03);
 }
 
 /* ---------- Fade In Animation ---------- */
@@ -135,23 +138,51 @@
 }
 
 /* ---------- Responsive Styling ---------- */
-@media (max-width: 768px) {
-  .exam-header h2 {
-    font-size: 1.4rem;
-  }
-
-  .btn-view, .btn-delete {
-    padding: 6px 10px;
-    font-size: 12px;
-  }
-
-  .modal-body {
-    font-size: 14px;
-  }
-
+@media (max-width: 992px) {
   .custom-table th,
   .custom-table td {
     font-size: 12px;
     padding: 10px;
+  }
+
+  .btn-view, .btn-delete {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+}
+
+/* ---------- Mobile Card Layout for Table ---------- */
+@media (max-width: 576px) {
+  .custom-table thead {
+    display: none;
+  }
+
+  .custom-table tbody tr {
+    display: block;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: #fff;
+    padding: 10px;
+    animation: fadeInUp 0.4s ease;
+  }
+
+  .custom-table td {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    font-size: 13px;
+    border: none;
+  }
+
+  .custom-table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #5038ED;
+  }
+
+  .btn-view, .btn-delete {
+    width: 48%;
+    text-align: center;
   }
 }

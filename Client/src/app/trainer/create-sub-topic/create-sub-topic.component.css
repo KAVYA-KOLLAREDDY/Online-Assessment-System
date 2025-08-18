@@ -99,11 +99,6 @@
    */
    /* Container styling */
 .create-subtopic-container {
-  background: #ffffff;
-  padding: 2rem;
-  border-radius: 20px;
-  box-shadow: 0 12px 28px rgba(80, 56, 237, 0.12);
-  
   margin: 0 auto;
   font-family: 'Poppins', sans-serif;
 }

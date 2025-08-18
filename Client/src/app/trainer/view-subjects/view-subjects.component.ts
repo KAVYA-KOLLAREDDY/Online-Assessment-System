@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule, NgClass } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../service/Auth.service';
+import { LoggingService } from '../../service/logging.service';
 
 @Component({
   selector: 'app-view-subjects',
@@ -28,6 +29,7 @@ export class ViewSubjectsComponent implements OnInit {
   private router = inject(Router);
   private authService = inject(AuthService);
   currentPermission = signal<any>(null);
+  private loggingService = inject(LoggingService);
 
   statuses = ['ACTIVE', 'INACTIVE'];
 
@@ -76,7 +78,7 @@ export class ViewSubjectsComponent implements OnInit {
     console.log('encodedname:', encodedName);
     this.router.navigate(['/trainer/examUpload', subjectId, encodedName]);
   }
-
+  
   manageSubtopics(subject: any) {
     const subjectId = subject.subjectId;
     this.router.navigate(['/trainer/manageSubTopics', subjectId]);
@@ -100,9 +102,11 @@ updateSubjectStatus() {
       next: () => {
         this.fetchSubjects();
         this.closeModal();
+        this.loggingService.onSuccess("Subject Updated Successfully");
       },
       error: (err) => {
         console.error('Update failed', err);
+        this.loggingService.onError('Subject Update Failed'+ err);
       },
     });
 }

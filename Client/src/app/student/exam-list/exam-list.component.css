@@ -144,6 +144,10 @@
   min-width: 200px;
 }
 
+.btn :hover{
+  transform: translate();
+}
+
 .btn-start {
   background: linear-gradient(134deg, #6e3fee, #5038ED);
   color: white;
@@ -242,91 +246,123 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-/* RESPONSIVE STYLING */
-@media (max-width: 992px) {
-  .custom-tabs .nav-link {
-    font-size: 13px;
-    padding: 12px;
+/* ===== Base styles stay as your original ===== */
+
+/* ===== EXTRA RESPONSIVENESS ===== */
+
+/* Small devices (up to 576px) */
+@media (max-width: 576px) {
+  .gradient-heading {
+    font-size: 1.5rem;
   }
 
+  .custom-tabs {
+    flex-direction: row;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+  .custom-tabs .nav-item {
+    flex: none;
+    min-width: max-content;
+  }
+  .custom-tabs .nav-link {
+    font-size: 12px;
+    padding: 8px 10px;
+    white-space: nowrap;
+  }
+
+  .btn {
+    width: 100%;
+    font-size: 12px;
+    padding: 8px;
+    margin-top: 6px;
+  }
+}
+
+/* Medium devices (577px - 768px) */
+@media (min-width: 577px) and (max-width: 768px) {
+  .custom-tabs {
+    flex-wrap: wrap;
+  }
+  .custom-tabs .nav-item {
+    flex: 1 1 50%;
+  }
+  .custom-tabs .nav-link {
+    font-size: 13px;
+    padding: 10px;
+  }
+}
+
+/* Tablets / Small laptops (769px - 992px) */
+@media (min-width: 769px) and (max-width: 991px) {
+  .custom-tabs .nav-link {
+    font-size: 13px;
+    padding: 14px;
+  }
   .btn {
     min-width: 160px;
     font-size: 12px;
   }
-
-  .exam-table th,
-  .exam-table td {
-    font-size: 12px;
-    padding: 12px;
-  }
-
   .desc {
-    max-width: 200px;
+    max-width: 220px;
   }
 }
 
+/* ===== MOBILE-FRIENDLY TABLE ===== */
 @media (max-width: 768px) {
-  .exam-dashboard-box {
-    border-radius: 12px;
-    box-shadow: 0 6px 18px rgba(80, 56, 237, 0.08);
-    margin: 0 10px;
-  }
-
-  .custom-tabs {
-    flex-direction: column;
-  }
-
-  .custom-tabs .nav-item {
-    width: 100%;
-  }
-
-  .custom-tabs .nav-link {
-    text-align: center;
-    font-size: 14px;
-    padding: 12px;
-    border-bottom: 1px solid #e6e6f5;
-  }
-
   .exam-table thead {
-    display: none; /* Hide header on mobile */
+    display: none;
   }
-
   .exam-table tbody tr {
     display: block;
     margin-bottom: 1rem;
     background: #fff;
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     padding: 10px;
   }
-
   .exam-table tbody td {
     display: flex;
     justify-content: space-between;
-    padding: 10px 14px;
+    align-items: flex-start;
+    padding: 10px 12px;
     border: none;
     font-size: 13px;
+    text-align: left;
+    word-break: break-word;
   }
-
   .exam-table tbody td::before {
     content: attr(data-label);
     font-weight: 600;
     color: #5038ED;
-    margin-right: 12px;
+    flex: 0 0 45%;
+    max-width: 45%;
+    padding-right: 8px;
+    white-space: nowrap;
   }
-
-  .exam-table td:first-child {
-    color: #5038ED;
+  .exam-table tbody td.desc {
+    flex-direction: column;
+    align-items: flex-start;
   }
-
-  .desc {
-    max-width: 100%;
+  .exam-table tbody td.desc::before {
+    margin-bottom: 4px;
   }
-
-  .btn {
-    font-size: 12px;
-    padding: 8px 12px;
+  .exam-table tbody td button {
     width: 100%;
     margin-top: 6px;
+    font-size: 12px;
+    padding: 8px;
   }
 }
+
+/* ===== Ultra-wide screens (>1400px) ===== */
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1400px;
+  }
+  .desc {
+    max-width: 350px;
+  }
+}
+

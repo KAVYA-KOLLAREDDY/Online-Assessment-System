@@ -156,56 +156,65 @@ showCelebrationModal = signal(false);
   };
 
   horizontalBarChartOptions: ChartOptions<'bar'> = {
-    indexAxis: 'y',
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      x: {
-        min: 0,
-        max: 100,
-        title: {
-          display: true,
-          text: 'Percentage',
-          font: { weight: 'bold' }
-        },
-        ticks: {
-          color: '#000',
-          font: { weight: 'bold' },
-          // callback: (value: number) => `${value}%` 
-        }
+  indexAxis: 'y',
+  responsive: true,
+  maintainAspectRatio: false,
+  layout: {
+    padding: { left: 20, right: 20 } // extra space for long labels
+  },
+  scales: {
+    x: {
+      min: 0,
+      max: 100,
+      title: {
+        display: true,
+        text: 'Percentage',
+        font: { weight: 'bold' }
       },
-      y: {
-        ticks: {
-          color: '#000',
-          font: { weight: 'bold' }
-        }
+      ticks: {
+        color: '#000',
+        font: { weight: 'bold' },
+        callback: (value) => `${value}%` // Always show percentages on x-axis
       }
     },
-    plugins: {
-      legend: {
-        display: true,
-        labels: {
-          generateLabels: () => [
-            { text: 'Best Performance', fillStyle: '#4CAF50', strokeStyle: '#ccc', lineWidth: 1 },
-            { text: 'Midlevel Performance', fillStyle: '#FFC107', strokeStyle: '#ccc', lineWidth: 1 },
-            { text: 'Miserable Performance', fillStyle: '#F44336', strokeStyle: '#ccc', lineWidth: 1 }
-          ]
-        }
-      },
-      tooltip: {
-        callbacks: {
-          label: (context) => `${context.label}: ${context.raw}%`
-        }
-      },
-      datalabels: {
-        anchor: 'end',
-        align: 'right',
+    y: {
+      ticks: {
         color: '#000',
-        font: { weight: 'bold', size: 10 },
-        formatter: (value) => `${value}%`
+        font: { weight: 'bold' },
+        callback: function(value) {
+          // Wrap long labels every 25 characters
+          const label = this.getLabelForValue(value as number);
+          return label.length > 25 ? label.match(/.{1,20}/g) : label;
+        }
       }
     }
-  };
+  },
+  plugins: {
+    legend: {
+      display: true,
+      labels: {
+        generateLabels: () => [
+          { text: 'Best Performance', fillStyle: '#4CAF50', strokeStyle: '#ccc', lineWidth: 1 },
+          { text: 'Midlevel Performance', fillStyle: '#FFC107', strokeStyle: '#ccc', lineWidth: 1 },
+          { text: 'Miserable Performance', fillStyle: '#F44336', strokeStyle: '#ccc', lineWidth: 1 }
+        ]
+      }
+    },
+    tooltip: {
+      callbacks: {
+        label: (context) => `${context.label}: ${context.raw}%`
+      }
+    },
+    datalabels: {
+      anchor: 'center',
+      align: 'center',
+      color: '#fff',
+      font: { weight: 'bold', size: 10 },
+      formatter: (value) => `${value}%` // Always show as XX%
+    }
+  }
+};
+
 
   ngOnInit() {
     this.examService.getExamResultById(this.id()).subscribe({

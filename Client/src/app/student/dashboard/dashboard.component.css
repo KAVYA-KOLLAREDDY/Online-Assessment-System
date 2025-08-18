@@ -70,6 +70,72 @@ i{
   position: relative;
 
 }
+/* Fade-in animation for dashboard cards */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Glow pulse for loading spinner */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 0px rgba(80, 56, 237, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(80, 56, 237, 0.6);
+  }
+}
+
+/* Apply fade-in to cards */
+.dashboard-card {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-left: 5px solid #5038ED;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  animation: fadeInUp 0.6s ease forwards;
+  opacity: 0; /* Start hidden until animation runs */
+}
+
+/* Hover effect */
+.dashboard-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 10px 20px rgba(80, 56, 237, 0.15);
+  border-left-color: #3f2bd9;
+}
+
+/* Spinner animation */
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+  color: #5038ED;
+  animation: pulseGlow 1.5s infinite ease-in-out;
+}
+
+/* Donut chart fade-in */
+.donutChart {
+  max-width: 370px;
+  height: 340px;
+  position: relative;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease forwards;
+  animation-delay: 0.4s;
+}
+
+@media (max-width: 768px) {
+  .donutChart {
+    margin: 0 auto;  /* Center on mobile */
+  }
+}
 
 @media (max-width: 768px) {
   .donutChart {
